@@ -6,6 +6,7 @@ public class Fraise : Plante
         Type = "Vivace";
         SaisonsDeSemis.AddRange(new List<string> { "Printemps", "Automne" });
         Espacement = 0.3;
+        TerrainPrefere = "Terre";
         PlaceNecessairePourGrandir = 0.5;
         VitesseCroissance = 1.0;
         BesoinEau = 0.7;

@@ -6,6 +6,7 @@ public class Salade : Plante
         Type = "Annuelle";
         SaisonsDeSemis.AddRange(new List<string> { "Printemps", "Automne" });
         Espacement = 0.25;
+        TerrainPrefere = "Terre";
         PlaceNecessairePourGrandir = 0.4;
         VitesseCroissance = 1.5;
         BesoinEau = 0.6;

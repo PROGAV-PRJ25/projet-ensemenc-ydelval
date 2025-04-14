@@ -6,6 +6,7 @@ public class Tomate : Plante
         Type = "Annuelle";
         SaisonsDeSemis.AddRange(new List<string> { "Printemps" });
         Espacement = 0.4;
+        TerrainPrefere = "Terre";
         PlaceNecessairePourGrandir = 0.8;
         VitesseCroissance = 1.2;
         BesoinEau = 0.8;

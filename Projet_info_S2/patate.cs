@@ -6,6 +6,7 @@ public class Patate : Plante
         Type = "Annuelle";
         SaisonsDeSemis.AddRange(new List<string> { "Printemps" });
         Espacement = 0.4;
+        TerrainPrefere = "Argile";
         PlaceNecessairePourGrandir = 0.9;
         VitesseCroissance = 1.1;
         BesoinEau = 0.7;

@@ -6,6 +6,7 @@ public class Cocotier : Plante
         Type = "Vivace";
         SaisonsDeSemis.AddRange(new List<string> { "Printemps", "Été" });
         Espacement = 1.5;
+        TerrainPrefere = "Sable";
         PlaceNecessairePourGrandir = 3.0;
         VitesseCroissance = 0.3;
         BesoinEau = 0.9;

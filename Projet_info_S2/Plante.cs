@@ -4,6 +4,7 @@ public abstract class Plante
     public string Type { get; set; } // Annuelle, Vivace, etc.
     public List<string> SaisonsDeSemis { get; set; }
     public double Espacement { get; set; }
+    public string TerrainPrefere { get; set;}
     public double PlaceNecessairePourGrandir { get; set; }
     public double VitesseCroissance { get; set; }
     public double BesoinEau { get; set; }

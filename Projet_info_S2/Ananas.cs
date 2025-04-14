@@ -6,6 +6,7 @@ public class Ananas : Plante
         Type = "Vivace";
         SaisonsDeSemis.AddRange(new List<string> { "Printemps" });
         Espacement = 0.5;
+        TerrainPrefere = "Sable";
         PlaceNecessairePourGrandir = 1.2;
         VitesseCroissance = 0.6;
         BesoinEau = 0.8;
