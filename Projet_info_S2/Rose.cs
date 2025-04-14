@@ -1,0 +1,26 @@
+public class Rose : Plante
+{
+    public Rose()
+    {
+        Nom = "Rose";
+        Type = "Vivace";
+        TerrainPrefere = "Terre";
+        SaisonsDeSemis = new List<string> { "printemps", "automne" };
+        Espacement = 0.4;
+        PlaceNecessairePourGrandir = 1.0;
+        VitesseCroissance = 0.3;
+        BesoinEau = 6;
+        BesoinLumiere = 0.7;
+        TemperatureMin = 5;
+        TemperatureMax = 30;
+        EsperanceDeVie = 5; // en années si tu veux simuler long terme
+        Production = 0; // pas comestible
+        Sante = 100;
+        MaladiesProbabilites = new Dictionary<string, double>
+        {
+            { "Oïdium", 0.1 },
+            { "Taches noires", 0.08 },
+            { "Rouille", 0.05 }
+        };
+    }
+}
