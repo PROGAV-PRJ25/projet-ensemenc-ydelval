@@ -1,22 +1,22 @@
-public class Patate : Plante : Terra
+public class Courgette : Plante
 {
-    public Patate()
+    public Courgette()
     {
-        Nom = "Patate";
-        Type = "Annuelle, Comestible";
-        SaisonsDeSemis = new List<string> { "Printemps" };
-        TerrainsPreferes = new List<string> { "Terre", "Argile" };
-        Espacement = 0.4;
-        PlaceNecessairePourGrandir = 1.2;
-        VitesseCroissance = 1.1;
-        BesoinEau = 1.3;
-        BesoinLumiere = 5.5;
-        TemperatureMin = 7.0;
+        Nom = "Courgette";
+        Type = "Annuelle";
+        SaisonsDeSemis.AddRange(new List<string> { "Printemps", "Début Été" });
+        Espacement = 0.7;
+        PlaceNecessairePourGrandir = 1.0;
+        VitesseCroissance = 1.3;
+        BesoinEau = 0.85;
+        BesoinLumiere = 0.95;
+        TemperatureMin = 15.0;
         TemperatureMax = 30.0;
-        MaladiesPossibles = new List<string> { "Mildiou", "Gale" };
-        ProbabiliteMaladie = 0.22;
         EsperanceDeVie = 100.0;
-        ProductionMax = 10;
+        Production = 10;
         Sante = 100;
+
+        MaladiesProbabilites.Add("Oïdium", 0.2);
+        MaladiesProbabilites.Add("Mildiou", 0.25);
     }
 }

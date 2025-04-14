@@ -3,20 +3,20 @@ public class Tomate : Plante
     public Tomate()
     {
         Nom = "Tomate";
-        Type = "Annuelle, Comestible";
-        SaisonsDeSemis = new List<string> { "Printemps" };
-        TerrainsPreferes = new List<string> { "Terre", "Argile" };
-        Espacement = 0.5;
-        PlaceNecessairePourGrandir = 1.0;
+        Type = "Annuelle";
+        SaisonsDeSemis.AddRange(new List<string> { "Printemps" });
+        Espacement = 0.4;
+        PlaceNecessairePourGrandir = 0.8;
         VitesseCroissance = 1.2;
-        BesoinEau = 1.5;
-        BesoinLumiere = 6.0;
+        BesoinEau = 0.8;
+        BesoinLumiere = 1.0;
         TemperatureMin = 15.0;
-        TemperatureMax = 35.0;
-        MaladiesPossibles = new List<string> { "Mildiou", "Oïdium" };
-        ProbabiliteMaladie = 0.25;
+        TemperatureMax = 30.0;
         EsperanceDeVie = 90.0;
-        ProductionMax = 20;
+        Production = 10;
         Sante = 100;
+
+        MaladiesProbabilites.Add("Mildiou", 0.3);
+        MaladiesProbabilites.Add("Oïdium", 0.2);
     }
 }

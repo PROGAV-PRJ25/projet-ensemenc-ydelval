@@ -3,20 +3,20 @@ public class Fraise : Plante
     public Fraise()
     {
         Nom = "Fraise";
-        Type = "Vivace, Comestible";
-        SaisonsDeSemis = new List<string> { "Printemps", "Automne" };
-        TerrainsPreferes = new List<string> { "Terre", "Sable" };
+        Type = "Vivace";
+        SaisonsDeSemis.AddRange(new List<string> { "Printemps", "Automne" });
         Espacement = 0.3;
-        PlaceNecessairePourGrandir = 0.6;
+        PlaceNecessairePourGrandir = 0.5;
         VitesseCroissance = 1.0;
-        BesoinEau = 1.2;
-        BesoinLumiere = 5.0;
+        BesoinEau = 0.7;
+        BesoinLumiere = 0.9;
         TemperatureMin = 10.0;
-        TemperatureMax = 30.0;
-        MaladiesPossibles = new List<string> { "Botrytis", "Anthracnose" };
-        ProbabiliteMaladie = 0.2;
-        EsperanceDeVie = 730.0;
-        ProductionMax = 15;
+        TemperatureMax = 25.0;
+        EsperanceDeVie = 730.0; // 2 ans
+        Production = 20;
         Sante = 100;
+
+        MaladiesProbabilites.Add("Botrytis", 0.2);
+        MaladiesProbabilites.Add("Anthracnose", 0.15);
     }
 }
