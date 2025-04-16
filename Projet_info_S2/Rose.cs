@@ -16,11 +16,9 @@ public class Rose : Plante
         EsperanceDeVie = 5; // en années si tu veux simuler long terme
         Production = 0; // pas comestible
         Sante = 100;
-        MaladiesProbabilites = new Dictionary<string, double>
-        {
-            { "Oïdium", 0.1 },
-            { "Taches noires", 0.08 },
-            { "Rouille", 0.05 }
-        };
+        MaladiesProbabilites.Add("Oïdium", 0.1);
+        MaladiesProbabilites.Add("Taches noires", 0.08 );
+        MaladiesProbabilites.Add("Rouille", 0.05 );
+        
     }
 }

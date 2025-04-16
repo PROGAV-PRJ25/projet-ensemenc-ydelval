@@ -11,7 +11,8 @@ public class France : Pays
             typeof(Courgette),
             typeof(Fraise),
             typeof(Carotte),
-            typeof(Rose)
+            typeof(Rose),
+            typeof(Mais),
         };
     }
 

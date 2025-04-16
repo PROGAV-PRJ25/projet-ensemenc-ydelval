@@ -16,9 +16,6 @@ public class Carotte : Plante
         EsperanceDeVie = 0.4;
         Production = 3;
         Sante = 100;
-        MaladiesProbabilites = new Dictionary<string, double>
-        {
-            { "Mouche de la carotte", 0.1 }
-        };
+        MaladiesProbabilites.Add("Mouche de la carotte", 0.1 );
     }
 }
