@@ -2,7 +2,7 @@ public class Mais : Plante
 {
     public Mais()
     {
-        Nom = "Maïs";
+        Nom = "Mais";
         Type = "Annuelle";
         TerrainPrefere = "Terre";
         SaisonsDeSemis = new List<string> { "printemps" };
@@ -16,7 +16,7 @@ public class Mais : Plante
         EsperanceDeVie = 0.5;
         Production = 2;
         Sante = 100;
-        MaladiesProbabilites.Add( "Charbon du maïs", 0.05);
+        MaladiesProbabilites.Add( "Charbon du mais", 0.05);
        
     }
 }

@@ -110,7 +110,7 @@ public abstract class Plante
     }
 
     // Croissance
-    if (Sante > 70)t
+    if (Sante > 70)
     {
         VitesseCroissance += 0.1;
         Console.WriteLine($"{Nom} pousse bien.");
