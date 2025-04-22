@@ -19,7 +19,7 @@ public class Potager
         for (int y = 0; y < Hauteur; y++)
         {
             for (int x = 0; x < Largeur; x++)
-            {
+             {
                 int choix = random.Next(3);
                 Terrain terrain = choix switch
                 {
@@ -68,6 +68,11 @@ public class Potager
 
     public bool Planter(Plante plante, int x, int y)
     {
+        if (!plante.SaisonsDeSemis.Contains(meteo.SaisonActuelle.ToLower()))
+    {
+        Console.WriteLine($"❌ La saison actuelle ({meteo.SaisonActuelle}) ne permet pas de planter {plante.Nom} !");
+        return false;
+    }
         if (!PeutPlanterIci(x, y, plante))
         {
             Console.WriteLine($"❌ Trop proche d'une autre plante pour placer {plante.Nom} en ({x},{y}) !");

@@ -1,17 +1,19 @@
 public class Meteo
 {
     public string SaisonActuelle { get; private set; }
-    public double Temperature { get; private set; }         // °C
-    public double Precipitations { get; private set; }      // mm
-    public double Ensoleillement { get; private set; }      // 0.0 à 1.0
-    public bool Intemperies { get; private set; }           // True si événement météo fort
-    public string EvenementSpecial { get; private set; }    // "Gel", "Grêle", etc.
+    public double Temperature { get; private set; } // °C
+    public double Precipitations { get; private set; } // mm
+    public double Ensoleillement { get; private set; } // 0.0 à 1.0
+    public bool Intemperies { get; private set; } // True si événement météo fort
+    public string EvenementSpecial { get; private set; } // "Gel", "Grêle", etc.
+    public int JourActuel { get; private set; } 
 
     private Random random = new Random();
 
     public Meteo(string saison)
     {
         SaisonActuelle = saison;
+        JourActuel = 1;
         GenererConditions();
     }
 
@@ -76,4 +78,15 @@ public class Meteo
         SaisonActuelle = nouvelleSaison;
         GenererConditions();
     }
+
+    public void IncrementeJour()
+    {
+    JourActuel++;
+    if (JourActuel > 30)
+    {
+        JourActuel = 1; // Réinitialiser à 1 pour nouvelle saison
+        ChangerSaison();
+    }
+    }
+
 }
