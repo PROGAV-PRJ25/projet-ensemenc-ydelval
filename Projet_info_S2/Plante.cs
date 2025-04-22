@@ -66,6 +66,7 @@ public abstract class Plante
         int conditionsFavorables = 0;
         int conditionsTotal = 5;
 
+<<<<<<< HEAD
         //  Température
         if (meteo.Temperature < TemperatureMin || meteo.Temperature > TemperatureMax)
         {
@@ -76,6 +77,14 @@ public abstract class Plante
         {
             conditionsFavorables++;
         }
+=======
+    // Croissance
+    if (Sante > 70)
+    {
+        VitesseCroissance += 0.1;
+        Console.WriteLine($"{Nom} pousse bien.");
+    }
+>>>>>>> d2fc24f87a08ab22b5abc8a1fb02910725baa3f6
 
         //  Lumière
         if (meteo.Ensoleillement < BesoinLumiere)
