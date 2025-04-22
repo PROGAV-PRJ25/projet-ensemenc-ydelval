@@ -16,6 +16,7 @@ public abstract class Plante
     public double EsperanceDeVie { get; set; } // en jours
     public int Production { get; set; } // nombre de fruits/légumes
     public int Sante { get; set; } // 0-100
+    public List<string> MaladiesActives { get; set; } = new List<string>();
     public bool EstBlessee => Sante < 100 && Sante > 0;  //   savoir si une plante est blessée
 
     //  Méthode pour soigner une plante
@@ -66,7 +67,6 @@ public abstract class Plante
         int conditionsFavorables = 0;
         int conditionsTotal = 5;
 
-<<<<<<< HEAD
         //  Température
         if (meteo.Temperature < TemperatureMin || meteo.Temperature > TemperatureMax)
         {
@@ -77,14 +77,12 @@ public abstract class Plante
         {
             conditionsFavorables++;
         }
-=======
     // Croissance
     if (Sante > 70)
     {
         VitesseCroissance += 0.1;
         Console.WriteLine($"{Nom} pousse bien.");
     }
->>>>>>> d2fc24f87a08ab22b5abc8a1fb02910725baa3f6
 
         //  Lumière
         if (meteo.Ensoleillement < BesoinLumiere)
@@ -126,13 +124,16 @@ public abstract class Plante
 
         //  Maladies
         foreach (var maladie in MaladiesProbabilites)
+{
+    if (new Random().NextDouble() < maladie.Value)
+    {
+        if (!MaladiesActives.Contains(maladie.Key))
         {
-            if (new Random().NextDouble() < maladie.Value)
-            {
-                Sante -= 10;
-                Console.WriteLine($"{Nom} a été touchée par la maladie : {maladie.Key}.");
-            }
+            MaladiesActives.Add(maladie.Key);
+            Console.WriteLine($"{Nom} a été touchée par la maladie : {maladie.Key}.");
         }
+    }
+}
 
         //  Intempéries
         if (meteo.Intemperies && new Random().NextDouble() < 0.3)
@@ -179,8 +180,18 @@ public abstract class Plante
         {
             Console.WriteLine($"Santé de {Nom} : {santeInitiale} → {Sante}");
         }
+        if (EstBlessee && !soinEffectueCeTour)
+        {
+            Sante -= 10;
+            Console.WriteLine($"{Nom} n'a pas été soignée et s'affaiblit davantage. Santé -10.");
+            if (Sante <= 0)
+            {
+                Sante = 0;
+                Console.WriteLine($"{Nom} est morte par négligence.");
+            }
+        }
 
         // Proposer un soin à la fin de l’évaluation si la plante est blessée
-        ProposerSoin();
+        ProposerSoin(); 
     }
 }
