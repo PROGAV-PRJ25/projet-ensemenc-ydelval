@@ -7,7 +7,6 @@ public class Parcelle
     {
         this.Plante = plante;
         this.Terrain = terrain;
-        this.Pays = pays ;
         
     }
 }
