@@ -62,7 +62,7 @@ public class Potager
             }
         }
 
-        // On peut planter uniquement si moins de "Espacement" directions sont déjà occupées
+        // On peut planter undéoiquement si moins de "Espacement" directions sont déjà occupées
         return directionsBloquees < plante.Espacement;
     }
 
@@ -192,5 +192,39 @@ public class Potager
         var typeSol = Grille[y, x].Terrain.TypeSol;
         Console.WriteLine($"📍 La parcelle ({x}, {y}) est de type : {typeSol}");
     }
+    public void Recolter(int x, int y)
+{
+    var parcelle = Grille[y, x];
+
+    if (parcelle.Plante == null)
+    {
+        Console.WriteLine(" OUPSII Aucune plante à récolter ici.");
+        return;
+    }
+
+    var plante = parcelle.Plante;
+
+    if (!plante.EstMure)
+    {
+        Console.WriteLine($" {plante.Nom} n'est pas encore mûre à ({x},{y}).");
+        return;
+    }
+
+    int quantiteRecoltee = plante.Production;
+    Console.WriteLine($"✅ Vous avez récolté {quantiteRecoltee} {plante.Nom}(s) à ({x},{y}).");
+
+    // Réinitialiser la plante après la récolte (si elle est vivace)
+    ReinitialiserApresRecolte(plante);
+
+    
+}
+
+private void ReinitialiserApresRecolte(Plante plante)
+{
+    plante.CroissanceActuelle = 0;
+    Console.WriteLine($"{plante.Nom} va repousser à nouveau.");
+}
+
+    
 }
 
