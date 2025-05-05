@@ -18,7 +18,9 @@ public abstract class Plante
     public int Sante { get; set; } // 0-100
     public List<string> MaladiesActives { get; set; } = new List<string>();
     public bool EstBlessee => Sante < 100 && Sante > 0;  //   savoir si une plante est blessée
-
+    private bool SoinEffectueCeTour = false ; 
+    public double CroissanceActuelle { get; set; } = 0; // 0 à 1 permet de savoir si l'on peut ou non récolter la plante 
+    public bool EstMure => CroissanceActuelle >= 1 && Sante > 0 ; 
     //  Méthode pour soigner une plante
     public void Soigner()
     {
@@ -34,6 +36,7 @@ public abstract class Plante
         if (Sante > 100) Sante = 100;
 
         Console.WriteLine($"{Nom} a été soignée. Santé : {santeInitiale} → {Sante}");
+        SoinEffectueCeTour = true ; 
     }
 
     // Interaction utilisateur pour proposer un soin
@@ -41,7 +44,9 @@ public abstract class Plante
     {
         if (EstBlessee)
         {
-            Console.WriteLine($"{Nom} est affaiblie. Souhaitez-vous la soigner ? Tapez 'soigner' pour lui administrer un soin.");
+            if(MaladiesActives != null && MaladiesActives.Count != 0 )
+            {
+                Console.WriteLine($"{Nom} est affaiblie. Souhaitez-vous la soigner ? Tapez 'soigner' pour lui administrer un soin.");
             string reponse = Console.ReadLine();
             if (reponse != null && reponse.Trim().ToLower() == "soigner")
             {
@@ -51,6 +56,9 @@ public abstract class Plante
             {
                 Console.WriteLine($"{Nom} n'a pas été soignée.");
             }
+
+            }
+            
         }
     }
 
@@ -81,6 +89,7 @@ public abstract class Plante
     if (Sante > 70)
     {
         VitesseCroissance += 0.1;
+        CroissanceActuelle += VitesseCroissance;
         Console.WriteLine($"{Nom} pousse bien.");
     }
 
@@ -102,6 +111,7 @@ public abstract class Plante
             Console.WriteLine($"{Nom} n’a pas reçu assez d’eau ({meteo.Precipitations}mm).");
         }
         else if (meteo.Precipitations > BesoinEau * 1.5)
+        
         {
             Sante -= 5;
             Console.WriteLine($"{Nom} a trop d’eau ({meteo.Precipitations}mm).");
@@ -180,7 +190,7 @@ public abstract class Plante
         {
             Console.WriteLine($"Santé de {Nom} : {santeInitiale} → {Sante}");
         }
-        if (EstBlessee && !soinEffectueCeTour)
+        if (EstBlessee && SoinEffectueCeTour == true )
         {
             Sante -= 10;
             Console.WriteLine($"{Nom} n'a pas été soignée et s'affaiblit davantage. Santé -10.");

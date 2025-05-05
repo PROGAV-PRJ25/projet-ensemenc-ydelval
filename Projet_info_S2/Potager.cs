@@ -192,13 +192,38 @@ public class Potager
         var typeSol = Grille[y, x].Terrain.TypeSol;
         Console.WriteLine($"📍 La parcelle ({x}, {y}) est de type : {typeSol}");
     }
-    public void Recolter(int x, int y)
+   public bool ProposerRecolte()
+{
+    bool recoltePossible = false;
+
+    for (int y = 0; y < Hauteur; y++)
+    {
+        for (int x = 0; x < Largeur; x++)
+        {
+            var parcelle = Grille[y, x];
+            if (parcelle.Plante != null && parcelle.Plante.EstMure)
+            {
+                Console.WriteLine($" {parcelle.Plante.Nom} mûre en ({x}, {y}) !");
+                recoltePossible = true;
+            }
+        }
+    }
+
+    if (!recoltePossible)
+    {
+        Console.WriteLine("aie Aucune plante n'est encore prête à être récoltée.");
+    }
+
+    return recoltePossible;
+}
+
+public void Recolter(int x, int y)
 {
     var parcelle = Grille[y, x];
 
     if (parcelle.Plante == null)
     {
-        Console.WriteLine(" OUPSII Aucune plante à récolter ici.");
+        Console.WriteLine("oupsi Aucune plante à récolter ici.");
         return;
     }
 
@@ -206,17 +231,14 @@ public class Potager
 
     if (!plante.EstMure)
     {
-        Console.WriteLine($" {plante.Nom} n'est pas encore mûre à ({x},{y}).");
+        Console.WriteLine($" oh no {plante.Nom} n'est pas encore mûre à ({x},{y}).");
         return;
     }
 
     int quantiteRecoltee = plante.Production;
-    Console.WriteLine($"✅ Vous avez récolté {quantiteRecoltee} {plante.Nom}(s) à ({x},{y}).");
+    Console.WriteLine($"youhou Vous avez récolté {quantiteRecoltee} {plante.Nom}(s) à ({x},{y}).");
 
-    // Réinitialiser la plante après la récolte (si elle est vivace)
     ReinitialiserApresRecolte(plante);
-
-    
 }
 
 private void ReinitialiserApresRecolte(Plante plante)
@@ -224,6 +246,7 @@ private void ReinitialiserApresRecolte(Plante plante)
     plante.CroissanceActuelle = 0;
     Console.WriteLine($"{plante.Nom} va repousser à nouveau.");
 }
+
 
     
 }
