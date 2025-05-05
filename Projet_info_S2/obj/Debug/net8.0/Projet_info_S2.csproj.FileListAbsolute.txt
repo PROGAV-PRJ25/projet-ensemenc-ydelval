@@ -13,3 +13,11 @@
 /home/yannick/yannickdelval_sachadevos/Projet_info_S2/obj/Debug/net8.0/Projet_info_S2.pdb
 /home/yannick/yannickdelval_sachadevos/Projet_info_S2/obj/Debug/net8.0/Projet_info_S2.genruntimeconfig.cache
 /home/yannick/yannickdelval_sachadevos/Projet_info_S2/obj/Debug/net8.0/ref/Projet_info_S2.dll
+h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\obj\Debug\net8.0\Projet_info_S2.GeneratedMSBuildEditorConfig.editorconfig
+h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\obj\Debug\net8.0\Projet_info_S2.AssemblyInfoInputs.cache
+h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\obj\Debug\net8.0\Projet_info_S2.AssemblyInfo.cs
+h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\obj\Debug\net8.0\Projet_info_S2.csproj.CoreCompileInputs.cache
+h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\obj\Debug\net8.0\Projet_info_S2.sourcelink.json
+h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\obj\Debug\net8.0\Projet_info_S2.dll
+h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\obj\Debug\net8.0\refint\Projet_info_S2.dll
+h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\obj\Debug\net8.0\Projet_info_S2.pdb

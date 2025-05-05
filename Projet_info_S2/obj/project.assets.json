@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\samia\\.nuget\\packages\\": {}
+    "C:\\Users\\sdevos002\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\samia\\OneDrive\\Bureau\\ENSC\\C#\\projet_info_S2\\yannickdelval_sachadevos\\Projet_info_S2\\Projet_info_S2.csproj",
+      "projectUniqueName": "H:\\PROGRAMATION_AVANCE\\Projet_informatique\\yannickdelval_sachadevos\\Projet_info_S2\\Projet_info_S2.csproj",
       "projectName": "Projet_info_S2",
-      "projectPath": "C:\\Users\\samia\\OneDrive\\Bureau\\ENSC\\C#\\projet_info_S2\\yannickdelval_sachadevos\\Projet_info_S2\\Projet_info_S2.csproj",
-      "packagesPath": "C:\\Users\\samia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\samia\\OneDrive\\Bureau\\ENSC\\C#\\projet_info_S2\\yannickdelval_sachadevos\\Projet_info_S2\\obj\\",
+      "projectPath": "H:\\PROGRAMATION_AVANCE\\Projet_informatique\\yannickdelval_sachadevos\\Projet_info_S2\\Projet_info_S2.csproj",
+      "packagesPath": "C:\\Users\\sdevos002\\.nuget\\packages\\",
+      "outputPath": "H:\\PROGRAMATION_AVANCE\\Projet_informatique\\yannickdelval_sachadevos\\Projet_info_S2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\samia\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\sdevos002\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.206/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

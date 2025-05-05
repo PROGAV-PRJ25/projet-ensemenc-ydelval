@@ -6,7 +6,7 @@ public class Meteo
     public double Ensoleillement { get; private set; } // 0.0 à 1.0
     public bool Intemperies { get; private set; } // True si événement météo fort
     public string EvenementSpecial { get; private set; } // "Gel", "Grêle", etc.
-    public int JourActuel { get; private set; } 
+    public int JourActuel { get; private set; }
 
     private Random random = new Random();
 
@@ -73,20 +73,30 @@ public class Meteo
         }
     }
 
-    public void ChangerSaison(string nouvelleSaison)
-    {
-        SaisonActuelle = nouvelleSaison;
-        GenererConditions();
-    }
-
     public void IncrementeJour()
     {
-    JourActuel++;
-    if (JourActuel > 30)
-    {
-        JourActuel = 1; // Réinitialiser à 1 pour nouvelle saison
-        ChangerSaison();
-    }
+        JourActuel++;
+        if (JourActuel > 30)
+        {
+            JourActuel = 1; // Réinitialiser à 1 pour nouvelle saison
+            SaisonActuelle = SaisonSuivante(SaisonActuelle);
+            GenererConditions(); // Génère nouvelles conditions météo
+        }
+        else
+        {
+            GenererConditions(); // Génère les conditions du jour suivant
+        }
     }
 
+    private string SaisonSuivante(string actuelle)
+    {
+        switch (actuelle.ToLower())
+        {
+            case "printemps": return "été";
+            case "été": return "automne";
+            case "automne": return "hiver";
+            case "hiver": return "printemps";
+            default: return "printemps";
+        }
+    }
 }
