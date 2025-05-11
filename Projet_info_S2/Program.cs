@@ -145,7 +145,7 @@ class Program
                         Console.WriteLine("Coordonnées Y : ");
                         int y = int.Parse(Console.ReadLine()!);
 
-                        if (potager.Planter(plante,x,y))
+                        if (potager.Planter(plante,x,y,meteo))
                         {
                             graines[nomP]--;
                         }

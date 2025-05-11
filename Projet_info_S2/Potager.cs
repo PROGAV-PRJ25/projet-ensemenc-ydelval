@@ -65,7 +65,7 @@ public class Potager
         return directionsBloquees < plante.Espacement;
     }
 
-    public bool Planter(Plante plante, int x, int y)
+    public bool Planter(Plante plante, int x, int y, Meteo meteo)
     {
         if (!plante.SaisonsDeSemis.Contains(meteo.SaisonActuelle.ToLower()))
     {
