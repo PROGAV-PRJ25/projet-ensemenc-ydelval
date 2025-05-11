@@ -167,7 +167,7 @@ public abstract class Plante
             return;
         }
 
-        // 📈 Croissance
+        // Croissance
         if (Sante > 70)
         {
             VitesseCroissance += 0.1;

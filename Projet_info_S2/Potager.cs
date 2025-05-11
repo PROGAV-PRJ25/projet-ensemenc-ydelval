@@ -4,7 +4,6 @@ public class Potager
     public int Hauteur { get; set; }
     public Parcelle[,] Grille { get; set; }
 
-    // Constructeur qui permet de spécifier la largeur et la hauteur
     public Potager(int largeur, int hauteur)
     {
         Largeur = largeur;
@@ -62,7 +61,7 @@ public class Potager
             }
         }
 
-        // On peut planter undéoiquement si moins de "Espacement" directions sont déjà occupées
+        // On peut planter uniquement si moins de "Espacement" directions sont déjà occupées
         return directionsBloquees < plante.Espacement;
     }
 
@@ -250,4 +249,3 @@ private void ReinitialiserApresRecolte(Plante plante)
 
     
 }
-
