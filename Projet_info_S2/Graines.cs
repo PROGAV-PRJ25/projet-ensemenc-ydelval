@@ -1,6 +1,5 @@
 public class Graines
 {
-    // Dictionnaire avec : NomPlante => Quantité
     private Dictionary<string, int> stock = new Dictionary<string, int>();
 
     // Ajouter une ou plusieurs graines
@@ -34,7 +33,7 @@ public class Graines
     // Affiche l’inventaire complet
     public void Afficher()
     {
-        Console.WriteLine("\\n🌾 Inventaire de graines :");
+        Console.WriteLine("\n Inventaire de graines :");
         foreach (var entry in stock)
         {
             Console.WriteLine($"- {entry.Key} : {entry.Value} graine(s)");

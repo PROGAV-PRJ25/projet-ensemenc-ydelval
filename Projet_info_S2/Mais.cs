@@ -5,7 +5,7 @@ public class Mais : Plante
         Nom = "Mais";
         Type = "Annuelle";
         TerrainPrefere = "Terre";
-        SaisonsDeSemis = new List<string> { "printemps" };
+        SaisonsDeSemis.AddRange(new List<string> { "printemps" });
         Espacement = 0.4;
         PlaceNecessairePourGrandir = 1.5;
         VitesseCroissance = 0.6;

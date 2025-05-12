@@ -3,7 +3,7 @@ public abstract class Plante
     //  Propriétés générales de la plante
     public string Nom { get; set; }
     public string Type { get; set; } // Annuelle, Vivace, etc.
-    public List<string> SaisonsDeSemis { get; set; }
+    public List<string> SaisonsDeSemis { get; set; } = new List<string>();
     public double Espacement { get; set; }
     public string TerrainPrefere { get; set;}
     public double PlaceNecessairePourGrandir { get; set; }
@@ -12,7 +12,7 @@ public abstract class Plante
     public double BesoinLumiere { get; set; }
     public double TemperatureMin { get; set; }
     public double TemperatureMax { get; set; }
-    public Dictionary<string, double> MaladiesProbabilites { get; set; }
+    public Dictionary<string, double> MaladiesProbabilites { get; set; } = new Dictionary<string, double>();
     public double EsperanceDeVie { get; set; } // en jours
     public int Production { get; set; } // nombre de fruits/légumes
     public int Sante { get; set; } // 0-100
