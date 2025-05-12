@@ -136,10 +136,31 @@ public class Potager
 
     public void AfficherGrille()
 {
-    Console.WriteLine("\n Vue du potager :\n");
+    Console.OutputEncoding = System.Text.Encoding.UTF8;
+    Console.Clear();
+    Console.WriteLine("\n🌿 VUE DU POTAGER 🌿\n");
+
+    // En-tête X
+    Console.Write("    ");
+    for (int x = 0; x < Largeur; x++)
+    {
+        Console.Write($" {x:D2} ");
+    }
+    Console.WriteLine();
+
+    // Bordure supérieure
+    Console.Write("    ┌");
+    for (int x = 0; x < Largeur; x++)
+    {
+        Console.Write("───");
+        if (x < Largeur - 1) Console.Write("┬");
+    }
+    Console.WriteLine("┐");
 
     for (int y = 0; y < Hauteur; y++)
     {
+        // Ligne de données
+        Console.Write($" {y:D2} │");
         for (int x = 0; x < Largeur; x++)
         {
             var parcelle = Grille[y, x];
@@ -147,38 +168,75 @@ public class Potager
 
             if (parcelle.Plante == null)
             {
-                symbole = " . "; // Assigner un symbole pour une parcelle vide
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                symbole = "🟫";
             }
             else
             {
-                symbole = GetSymboleSimple(parcelle.Plante.Nom); // Assigner le symbole de la plante
+                switch (parcelle.Plante.Nom.ToLower())
+                {
+                    case "tomate":
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        symbole = "🍅";
+                        break;
+                    case "carotte":
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        symbole = "🥕";
+                        break;
+                    case "salade":
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        symbole = "🥬";
+                        break;
+                    case "oignon":
+                        Console.ForegroundColor = ConsoleColor.White;
+                        symbole = "🧅";
+                        break;
+                    case "maïs":
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        symbole = "🌽";
+                        break;
+                    case "tournesol":
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        symbole = "🌻";
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        symbole = "🌱";
+                        break;
+                }
             }
 
-            Console.Write(symbole);
+            Console.Write($" {symbole} ");
+            Console.ResetColor();
+            Console.Write("│");
         }
         Console.WriteLine();
+
+        // Bordure intermédiaire ou inférieure
+        if (y < Hauteur - 1)
+        {
+            Console.Write("    ├");
+            for (int x = 0; x < Largeur; x++)
+            {
+                Console.Write("───");
+                if (x < Largeur - 1) Console.Write("┼");
+            }
+            Console.WriteLine("┤");
+        }
     }
 
-    Console.WriteLine("\nLégende : T = Tomate, S = Salade, A = Ananas, R = Rose, . = Vide");
+    // Bordure inférieure
+    Console.Write("    └");
+    for (int x = 0; x < Largeur; x++)
+    {
+        Console.Write("───");
+        if (x < Largeur - 1) Console.Write("┴");
+    }
+    Console.WriteLine("┘");
+
+    Console.WriteLine("\nLégende : 🍅 Tomate | 🥕 Carotte | 🥬 Salade | 🧅 Oignon | 🌽 Maïs | 🌻 Tournesol | 🟫 Vide\n");
 }
 
-
-    private string GetSymboleSimple(string nom)
-    {
-        return nom.ToLower() switch
-        {
-            "tomate" => " T ",
-            "salade" => " S ",
-            "ananas" => " A ",
-            "rose" => " R ",
-            "carotte" => " C ",
-            "patate" => " P ",
-            "mais" => " M ",
-            "Cocotier" => " CO ",
-            "Courgette" => " CT ",
-            _ => " ? "
-        };
-    }
 
     public void AfficherTypeSol(int x, int y)
     {

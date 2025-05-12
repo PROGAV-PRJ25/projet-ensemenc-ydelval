@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "/home/yannick/.nuget/packages/": {}
+    "C:\\Users\\sdevos002\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/yannick/yannickdelval_sachadevos/Projet_info_S2/Projet_info_S2.csproj",
+      "projectUniqueName": "H:\\PROGRAMATION_AVANCE\\Projet_informatique\\yannickdelval_sachadevos\\Projet_info_S2\\Projet_info_S2.csproj",
       "projectName": "Projet_info_S2",
-      "projectPath": "/home/yannick/yannickdelval_sachadevos/Projet_info_S2/Projet_info_S2.csproj",
-      "packagesPath": "/home/yannick/.nuget/packages/",
-      "outputPath": "/home/yannick/yannickdelval_sachadevos/Projet_info_S2/obj/",
+      "projectPath": "H:\\PROGRAMATION_AVANCE\\Projet_informatique\\yannickdelval_sachadevos\\Projet_info_S2\\Projet_info_S2.csproj",
+      "packagesPath": "C:\\Users\\sdevos002\\.nuget\\packages\\",
+      "outputPath": "H:\\PROGRAMATION_AVANCE\\Projet_informatique\\yannickdelval_sachadevos\\Projet_info_S2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/yannick/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\sdevos002\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.206/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

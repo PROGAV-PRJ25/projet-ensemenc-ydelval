@@ -21,3 +21,10 @@ h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_
 h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\obj\Debug\net8.0\Projet_info_S2.dll
 h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\obj\Debug\net8.0\refint\Projet_info_S2.dll
 h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\obj\Debug\net8.0\Projet_info_S2.pdb
+h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\bin\Debug\net8.0\Projet_info_S2.exe
+H:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\bin\Debug\net8.0\Projet_info_S2.deps.json
+H:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\bin\Debug\net8.0\Projet_info_S2.runtimeconfig.json
+h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\bin\Debug\net8.0\Projet_info_S2.dll
+h:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\bin\Debug\net8.0\Projet_info_S2.pdb
+H:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\obj\Debug\net8.0\Projet_info_S2.genruntimeconfig.cache
+H:\PROGRAMATION_AVANCE\Projet_informatique\yannickdelval_sachadevos\Projet_info_S2\obj\Debug\net8.0\ref\Projet_info_S2.dll

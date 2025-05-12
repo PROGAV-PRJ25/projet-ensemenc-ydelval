@@ -48,7 +48,7 @@ class Program
 
         Potager potager = new Potager(hauteur, largeur);
 
-        // Affiche les conditions météo pour 35 jours
+        // Affiche les conditions météo 
 
 
             Console.WriteLine($"Jour {meteo.JourActuel} - Saison : {meteo.SaisonActuelle}");

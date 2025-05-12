@@ -16,7 +16,6 @@ public class Fraise : Plante
         EsperanceDeVie = 730.0; // 2 ans
         Production = 20;
         Sante = 100;
-
         MaladiesProbabilites.Add("Botrytis", 0.2);
         MaladiesProbabilites.Add("Anthracnose", 0.15);
     }
