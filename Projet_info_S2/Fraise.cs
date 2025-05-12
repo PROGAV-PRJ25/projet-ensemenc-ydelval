@@ -4,13 +4,13 @@ public class Fraise : Plante
     {
         Nom = "Fraise";
         Type = "Vivace";
-        SaisonsDeSemis.AddRange(new List<string> { "Printemps", "Automne" });
+        SaisonsDeSemis.AddRange(new List<string> { "printemps", "automne" });
         Espacement = 0.3;
         TerrainPrefere = "Terre";
         PlaceNecessairePourGrandir = 0.5;
         VitesseCroissance = 1.0;
         BesoinEau = 0.7;
-        BesoinLumiere = 0.9;
+        BesoinLumiere = 0.7;
         TemperatureMin = 10.0;
         TemperatureMax = 25.0;
         EsperanceDeVie = 730.0; // 2 ans

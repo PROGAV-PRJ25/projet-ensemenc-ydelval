@@ -4,13 +4,13 @@ public class Salade : Plante
     {
         Nom = "Salade";
         Type = "Annuelle";
-        SaisonsDeSemis.AddRange(new List<string> { "Printemps", "Automne" });
+        SaisonsDeSemis.AddRange(new List<string> { "printemps", "automne" });
         Espacement = 0.25;
         TerrainPrefere = "Terre";
         PlaceNecessairePourGrandir = 0.4;
         VitesseCroissance = 1.5;
         BesoinEau = 0.6;
-        BesoinLumiere = 0.8;
+        BesoinLumiere = 0.6;
         TemperatureMin = 5.0;
         TemperatureMax = 22.0;
         EsperanceDeVie = 60.0;

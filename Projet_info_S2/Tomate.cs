@@ -4,13 +4,13 @@ public class Tomate : Plante
     {
         Nom = "Tomate";
         Type = "Annuelle";
-        SaisonsDeSemis.AddRange(new List<string> { "Printemps" });
+        SaisonsDeSemis.AddRange(new List<string> { "printemps" });
         Espacement = 0.4;
         TerrainPrefere = "Terre";
         PlaceNecessairePourGrandir = 0.8;
         VitesseCroissance = 1.2;
         BesoinEau = 0.8;
-        BesoinLumiere = 1.0;
+        BesoinLumiere = 0.9;
         TemperatureMin = 15.0;
         TemperatureMax = 30.0;
         EsperanceDeVie = 90.0;

@@ -5,6 +5,7 @@ public class Graines
     // Ajouter une ou plusieurs graines
     public void Ajouter(string nomPlante, int quantite = 1)
     {
+        nomPlante = nomPlante.ToLower();
         if (stock.ContainsKey(nomPlante))
             stock[nomPlante] += quantite;
         else
@@ -14,6 +15,7 @@ public class Graines
     // Utiliser une graine (retire 1 si dispo, sinon refuse)
     public bool Utiliser(string nomPlante)
     {
+        nomPlante = nomPlante.ToLower();
         if (stock.ContainsKey(nomPlante) && stock[nomPlante] > 0)
         {
             stock[nomPlante]--;
@@ -27,6 +29,7 @@ public class Graines
     // Vérifie si on a au moins 1 graine
     public bool AGraines(string nomPlante)
     {
+        nomPlante = nomPlante.ToLower();
         return stock.ContainsKey(nomPlante) && stock[nomPlante] > 0;
     }
 

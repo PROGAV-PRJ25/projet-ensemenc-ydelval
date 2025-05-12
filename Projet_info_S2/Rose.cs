@@ -10,7 +10,7 @@ public class Rose : Plante
         PlaceNecessairePourGrandir = 1.0;
         VitesseCroissance = 0.3;
         BesoinEau = 6;
-        BesoinLumiere = 0.7;
+        BesoinLumiere = 0.55;
         TemperatureMin = 5;
         TemperatureMax = 30;
         EsperanceDeVie = 5; // en années si tu veux simuler long terme

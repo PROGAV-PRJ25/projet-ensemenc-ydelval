@@ -67,7 +67,7 @@ public abstract class Plante
     {
         if (Sante <= 0)
         {
-            Console.WriteLine($"{Nom} est déjà morte.");
+            Console.WriteLine($"{Nom} est morte.");
             return;
         }
 
@@ -78,7 +78,7 @@ public abstract class Plante
         //  Température
         if (meteo.Temperature < TemperatureMin || meteo.Temperature > TemperatureMax)
         {
-            Sante -= 15;
+            Sante -= 5;
             Console.WriteLine($"{Nom} souffre d'une température extrême ({meteo.Temperature}°C).");
         }
         else
@@ -96,7 +96,7 @@ public abstract class Plante
         //  Lumière
         if (meteo.Ensoleillement < BesoinLumiere)
         {
-            Sante -= 10;
+            Sante -= 5;
             Console.WriteLine($"{Nom} manque de lumière (ensoleillement {meteo.Ensoleillement}).");
         }
         else
@@ -201,7 +201,7 @@ public abstract class Plante
             }
         }
 
-        // Proposer un soin à la fin de l’évaluation si la plante est blessée
+        // Proposer un soin à la fin de l’évaluation si la plante est malade
         ProposerSoin(); 
     }
 }

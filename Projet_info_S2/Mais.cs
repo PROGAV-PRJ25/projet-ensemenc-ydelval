@@ -10,7 +10,7 @@ public class Mais : Plante
         PlaceNecessairePourGrandir = 1.5;
         VitesseCroissance = 0.6;
         BesoinEau = 8;
-        BesoinLumiere = 0.8;
+        BesoinLumiere = 0.65;
         TemperatureMin = 15;
         TemperatureMax = 35;
         EsperanceDeVie = 0.5;

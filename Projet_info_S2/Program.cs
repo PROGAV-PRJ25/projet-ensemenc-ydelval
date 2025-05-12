@@ -31,7 +31,7 @@ class Program
             if (plante != null)
             {
                 plantesDisponibles.Add(plante);
-                graines.Ajouter(plante.Nom,1); // 1 graine de départ
+                graines.Ajouter(plante.Nom,3); // 3 graines de départ par plante
                 Console.WriteLine($"🌱 {plante.Nom} - Type : {plante.Type} - Terrain préféré : {plante.TerrainPrefere}");
             }
         }
@@ -59,12 +59,15 @@ class Program
                 Console.WriteLine($"Événement spécial : {meteo.EvenementSpecial}");
                 Console.WriteLine("-------------------------");
 
+                //Affiche l'état des plantes à chaque tour
+                
+                potager.AfficherEtat();
+
                 //Affiche le potager à chaque tour
 
                 potager.AfficherGrille();
 
-                //Affiche l'état des plantes à chaque tour
-                potager.AfficherEtat();
+
 
                 Console.WriteLine("\n===== Menu Principal =====");
                 Console.WriteLine("1. Planter");
@@ -84,7 +87,7 @@ class Program
                         Console.WriteLine("Quelle plante voulez-vous planter?");
                         string nomP = Console.ReadLine()!;
 
-                        if (!graines.AGraines(nomP))
+                        if (!graines.AGraines(nomP.ToLower()))
                         {
                             Console.WriteLine("Vous n'avez pas de graines de cette plante");
                             break;
@@ -143,7 +146,11 @@ class Program
 
                         if (potager.Planter(plante,x,y,meteo))
                         {
-                            graines.Utiliser(nomP);
+                            graines.Utiliser(nomP.ToLower());
+                        }
+                        else
+                        {
+                            Console.WriteLine($"❌ Échec de plantation de {plante.Nom} en ({x},{y}).");
                         }
                         break;
                     }
