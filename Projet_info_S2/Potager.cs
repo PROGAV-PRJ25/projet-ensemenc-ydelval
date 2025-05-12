@@ -98,48 +98,62 @@ public class Potager
         }
     }
 
-    public void AfficherEtat()
+public void AfficherEtat()
 {
     Console.WriteLine("\n--- État du potager ---");
+
+    bool planteTrouvee = false;
+
     for (int y = 0; y < Hauteur; y++)
     {
         for (int x = 0; x < Largeur; x++)
         {
             var p = Grille[y, x];
-            string nom;
             if (p.Plante != null)
             {
-                nom = p.Plante.Nom; // Assigner le nom de la plante si elle existe
-            }
-            else
-            {
-                nom = "vide"; // Assigner "vide" si la plante est null
-            }
+                planteTrouvee = true;
 
-            string sol = p.Terrain.TypeSol;
+                string nom = p.Plante.Nom;
+                string sol = p.Terrain.TypeSol;
+                string sante = $"{p.Plante.Sante}/100";
 
-            string sante;
-            if (p.Plante != null)
-            {
-                sante = $"{p.Plante.Sante}/100"; // Assigner la santé de la plante si elle existe
+                Console.WriteLine($"[{x},{y}] - {nom} sur {sol} – Santé : {sante}");
             }
-            else
-            {
-                sante = "-"; // Assigner "-" si la plante est null
-            }
-
-            Console.WriteLine($"[{x},{y}] - {nom} sur {sol} – Santé : {sante}");
         }
+    }
+
+    if (!planteTrouvee)
+    {
+        Console.WriteLine("Aucune plante dans le potager.");
     }
 }
 
 
-    public void AfficherGrille()
+
+    public void AfficherGrille()  
 {
-    Console.WriteLine("\n Vue du potager :\n");
+    Console.WriteLine("\n🌿 VUE DU POTAGER 🌿\n");
+
+    // En-tête X
+    Console.Write("    ");
+    for (int x = 0; x < Largeur; x++)
+    {
+        Console.Write($" {x:D2} ");
+    }
+    Console.WriteLine();
+
+    // Bordure supérieure
+    Console.Write("    ┌");
+    for (int x = 0; x < Largeur; x++)
+    {
+        Console.Write("───");
+        if (x < Largeur - 1) Console.Write("┬");
+    }
+    Console.WriteLine("┐");
 
     for (int y = 0; y < Hauteur; y++)
     {
+        Console.Write($" {y:D2} │");
         for (int x = 0; x < Largeur; x++)
         {
             var parcelle = Grille[y, x];
@@ -147,38 +161,99 @@ public class Potager
 
             if (parcelle.Plante == null)
             {
-                symbole = " . "; // Assigner un symbole pour une parcelle vide
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                symbole = "🟫";
             }
             else
             {
-                symbole = GetSymboleSimple(parcelle.Plante.Nom); // Assigner le symbole de la plante
+                switch (parcelle.Plante.Nom.ToLower())
+                {
+                    case "tomate":
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        symbole = "🍅";
+                        break;
+                    case "carotte":
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        symbole = "🥕";
+                        break;
+                    case "salade":
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        symbole = "🥬";
+                        break;
+                    case "oignon":
+                        Console.ForegroundColor = ConsoleColor.White;
+                        symbole = "🧅";
+                        break;
+                    case "mais":
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        symbole = "🌽";
+                        break;
+                    case "tournesol":
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        symbole = "🌻";
+                        break;
+                    case "fraise":
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        symbole = "🍓";
+                        break;
+                    case "ananas":
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        symbole = "🍍";
+                        break;
+                    case "patate":
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        symbole = "🥔";
+                        break;
+                    case "rose":
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        symbole = "🌹";
+                        break;
+                    case "courgette":
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        symbole = "🥒";
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        symbole = "🌱";
+                        break;
+                }
             }
 
-            Console.Write(symbole);
+            // Affichage fixe sur 3 colonnes
+            Console.Write($" {symbole.PadRight(2)} ");
+            Console.ResetColor();
+            Console.Write("│");
         }
         Console.WriteLine();
+
+        // Bordure intermédiaire
+        if (y < Hauteur - 1)
+        {
+            Console.Write("    ├");
+            for (int x = 0; x < Largeur; x++)
+            {
+                Console.Write("───");
+                if (x < Largeur - 1) Console.Write("┼");
+            }
+            Console.WriteLine("┤");
+        }
     }
 
-    Console.WriteLine("\nLégende : T = Tomate, S = Salade, A = Ananas, R = Rose, . = Vide");
+    // Bordure inférieure
+    Console.Write("    └");
+    for (int x = 0; x < Largeur; x++)
+    {
+        Console.Write("───");
+        if (x < Largeur - 1) Console.Write("┴");
+    }
+    Console.WriteLine("┘");
+
+    // Légende
+    Console.WriteLine("\nLégende : 🍅 Tomate | 🥕 Carotte | 🥬 Salade | 🧅 Oignon | 🌽 Maïs | 🌻 Tournesol | 🍍 Ananas | 🍓 Fraise | 🥔 Patate | 🌹 Rose | 🥒 Courgette | 🟫 Vide\n");
 }
 
 
-    private string GetSymboleSimple(string nom)
-    {
-        return nom.ToLower() switch
-        {
-            "tomate" => " T ",
-            "salade" => " S ",
-            "ananas" => " A ",
-            "rose" => " R ",
-            "carotte" => " C ",
-            "patate" => " P ",
-            "mais" => " M ",
-            "Cocotier" => " CO ",
-            "Courgette" => " CT ",
-            _ => " ? "
-        };
-    }
+
 
     public void AfficherTypeSol(int x, int y)
     {
