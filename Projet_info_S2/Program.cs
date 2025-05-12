@@ -2,15 +2,13 @@
 
 class Program
 {
-    static Dictionary<string, int> graines = new Dictionary<string, int>();
+    static Graines graines = new Graines();
 
     static void Main()
     {
         Console.WriteLine("Bienvenue dans votre potager!") ; 
 
         France france = new France();
-        Martinique martinique = new Martinique();
-        
 
         Console.WriteLine("Votre potager est situé en France");
         Console.WriteLine("Voici tout ce que vous pouvez planter :") ; 
@@ -33,7 +31,7 @@ class Program
             if (plante != null)
             {
                 plantesDisponibles.Add(plante);
-                graines[plante.Nom] = 1; // 1 graine de départ
+                graines.Ajouter(plante.Nom,1); // 1 graine de départ
                 Console.WriteLine($"🌱 {plante.Nom} - Type : {plante.Type} - Terrain préféré : {plante.TerrainPrefere}");
             }
         }
@@ -43,12 +41,12 @@ class Program
         Console.WriteLine("Choisisssez la taille de votre potager");
         Console.WriteLine("Hauteur :");
         int hauteur = int.Parse(Console.ReadLine()!);
-        Console.WriteLine("Hauteur :");
+        Console.WriteLine("Largeur :");
         int largeur = int.Parse(Console.ReadLine()!);
 
         Potager potager = new Potager(hauteur, largeur);
 
-        // Affiche les conditions météo pour 35 jours
+        // Affiche les conditions météo 
 
 
             Console.WriteLine($"Jour {meteo.JourActuel} - Saison : {meteo.SaisonActuelle}");
@@ -88,7 +86,7 @@ class Program
                         Console.WriteLine("Quelle plante voulez-vous planter?");
                         string nomP = Console.ReadLine()!;
 
-                        if (!graines.ContainsKey(nomP) || graines[nomP] <= 0)
+                        if (!graines.AGraines(nomP))
                         {
                             Console.WriteLine("Vous n'avez pas de graines de cette plante");
                             break;
@@ -147,7 +145,7 @@ class Program
 
                         if (potager.Planter(plante,x,y,meteo))
                         {
-                            graines[nomP]--;
+                            graines.Utiliser(nomP);
                         }
                         break;
                     }
@@ -157,6 +155,9 @@ class Program
                         Console.WriteLine("Coordonnées Y : ");
                         int ry = int.Parse(Console.ReadLine()!);
                         potager.Recolter(rx,ry);
+                        break;
+                    case "7":
+                        graines.Afficher();
                         break;
                 }
 
