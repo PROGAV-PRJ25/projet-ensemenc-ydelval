@@ -46,28 +46,32 @@ class Program
 
         Potager potager = new Potager(hauteur, largeur);
 
-        // Affiche les conditions météo 
-
-
-            Console.WriteLine($"Jour {meteo.JourActuel} - Saison : {meteo.SaisonActuelle}");
-            Console.WriteLine($"Température : {meteo.Temperature} °C");
-            Console.WriteLine($"Précipitations : {meteo.Precipitations} mm");
-            Console.WriteLine($"Ensoleillement : {meteo.Ensoleillement:F2} (de 0 à 1)");
-            Console.WriteLine($"Intempéries : {(meteo.Intemperies ? "Oui" : "Non")}");
-            Console.WriteLine($"Événement spécial : {meteo.EvenementSpecial}");
-            Console.WriteLine("-------------------------");
-
             // Boucle de jeu
             while (true)
             {
+                // Affiche les conditions météo à chaque tour
+
+                Console.WriteLine($"Jour {meteo.JourActuel} - Saison : {meteo.SaisonActuelle}");
+                Console.WriteLine($"Température : {meteo.Temperature} °C");
+                Console.WriteLine($"Précipitations : {meteo.Precipitations} mm");
+                Console.WriteLine($"Ensoleillement : {meteo.Ensoleillement:F2} (de 0 à 1)");
+                Console.WriteLine($"Intempéries : {(meteo.Intemperies ? "Oui" : "Non")}");
+                Console.WriteLine($"Événement spécial : {meteo.EvenementSpecial}");
+                Console.WriteLine("-------------------------");
+
+                //Affiche le potager à chaque tour
+
+                potager.AfficherGrille();
+
+                //Affiche l'état des plantes à chaque tour
+                potager.AfficherEtat();
+
                 Console.WriteLine("\n===== Menu Principal =====");
-                Console.WriteLine("1. Afficher potager");
-                Console.WriteLine("2. Afficher état des plantes");
-                Console.WriteLine("3. Planter");
-                Console.WriteLine("4. Récolter");
-                Console.WriteLine("5. Passer au jour suivant");
-                Console.WriteLine("6. Afficher météo");
-                Console.WriteLine("7. Afficher graines");
+                Console.WriteLine("1. Planter");
+                Console.WriteLine("2. Récolter");
+                Console.WriteLine("3. Passer au jour suivant");
+                Console.WriteLine("4. Afficher graines");
+                Console.WriteLine("5. Soigner une plante");
                 Console.WriteLine("0. Quitter");
 
                 Console.Write("Choix : ");
@@ -76,12 +80,6 @@ class Program
 
                 switch (choix){
                     case "1":
-                        potager.AfficherGrille();
-                        break;
-                    case "2":
-                        potager.AfficherEtat();
-                        break;
-                    case "3":
                     {
                         Console.WriteLine("Quelle plante voulez-vous planter?");
                         string nomP = Console.ReadLine()!;
@@ -149,21 +147,42 @@ class Program
                         }
                         break;
                     }
-                    case "4":
+                    case "2":
                         Console.WriteLine("Coordonnées X : ");
                         int rx = int.Parse(Console.ReadLine()!);
                         Console.WriteLine("Coordonnées Y : ");
                         int ry = int.Parse(Console.ReadLine()!);
                         potager.Recolter(rx,ry);
                         break;
-                    case "7":
+                    case "3":
+                        meteo.IncrementeJour();
+                        potager.EvaluerPlantes(meteo);
+                        break;
+                    case "4":
                         graines.Afficher();
                         break;
+                    case "5":
+                        Console.WriteLine("Coordonnées X de la plante à soigner : ");
+                        int sx = int.Parse(Console.ReadLine()!);
+                        Console.WriteLine("Coordonnées Y de la plante à soigner : ");
+                        int sy = int.Parse(Console.ReadLine()!);
+                        var planteASoigner = potager.Grille[sy, sx].Plante;
+                        if (planteASoigner != null)
+                        {
+                            planteASoigner.Soigner();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Aucune plante à cet endroit.");
+                        }
+                        break;
+                    case "0":
+                        Console.WriteLine("👋 Merci d'avoir joué !");
+                        return;
+                    default:
+                        Console.WriteLine("❌ Choix invalide.");
+                        break;
                 }
-
-
-
-                
         }
     }
 }

@@ -134,7 +134,7 @@ public class Potager
 }
 
 
-    public void AfficherGrille()
+    public void AfficherGrille() 
 {
     Console.OutputEncoding = System.Text.Encoding.UTF8;
     Console.Clear();
@@ -191,13 +191,33 @@ public class Potager
                         Console.ForegroundColor = ConsoleColor.White;
                         symbole = "🧅";
                         break;
-                    case "maïs":
+                    case "mais":
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         symbole = "🌽";
                         break;
                     case "tournesol":
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         symbole = "🌻";
+                        break;
+                    case "fraise":
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        symbole = "🍓";
+                        break;
+                    case "ananas":
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        symbole = "🍍";
+                        break;
+                    case "patate":
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        symbole = "🥔";
+                        break;
+                    case "rose":
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        symbole = "🌹";
+                        break;
+                    case "courgette":
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        symbole = "🥒";
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Cyan;
@@ -234,8 +254,9 @@ public class Potager
     }
     Console.WriteLine("┘");
 
-    Console.WriteLine("\nLégende : 🍅 Tomate | 🥕 Carotte | 🥬 Salade | 🧅 Oignon | 🌽 Maïs | 🌻 Tournesol | 🟫 Vide\n");
+    Console.WriteLine("\nLégende : 🍅 Tomate | 🥕 Carotte | 🥬 Salade | 🧅 Oignon | 🌽 Maïs | 🌻 Tournesol | 🍍 Ananas | 🍓 Fraise | 🥔 Patate | 🌹 Rose | 🥒 Courgette | 🟫 Vide\n");
 }
+
 
 
     public void AfficherTypeSol(int x, int y)
