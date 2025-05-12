@@ -25,7 +25,7 @@ class Program
             else if (typePlante == typeof(Carotte)) plante = new Carotte();
             else if (typePlante == typeof(Courgette)) plante = new Courgette();
             else if (typePlante == typeof(Fraise)) plante = new Fraise();
-            else if (typePlante == typeof(Cocotier)) plante = new Cocotier();
+            else if (typePlante == typeof(Oignon)) plante = new Oignon();
             else if (typePlante == typeof(Mais)) plante = new Mais();
 
             if (plante != null)
@@ -103,8 +103,8 @@ class Program
                             case "carotte":
                                 plante = new Carotte();
                                 break;
-                            case "cocotier":
-                                plante = new Cocotier();
+                            case "oignon":
+                                plante = new Oignon();
                                 break;
                             case "fraise":
                                 plante = new Fraise();

@@ -98,46 +98,40 @@ public class Potager
         }
     }
 
-    public void AfficherEtat()
+public void AfficherEtat()
 {
     Console.WriteLine("\n--- État du potager ---");
+
+    bool planteTrouvee = false;
+10
     for (int y = 0; y < Hauteur; y++)
     {
         for (int x = 0; x < Largeur; x++)
         {
             var p = Grille[y, x];
-            string nom;
             if (p.Plante != null)
             {
-                nom = p.Plante.Nom; // Assigner le nom de la plante si elle existe
-            }
-            else
-            {
-                nom = "vide"; // Assigner "vide" si la plante est null
-            }
+                planteTrouvee = true;
 
-            string sol = p.Terrain.TypeSol;
+                string nom = p.Plante.Nom;
+                string sol = p.Terrain.TypeSol;
+                string sante = $"{p.Plante.Sante}/100";
 
-            string sante;
-            if (p.Plante != null)
-            {
-                sante = $"{p.Plante.Sante}/100"; // Assigner la santé de la plante si elle existe
+                Console.WriteLine($"[{x},{y}] - {nom} sur {sol} – Santé : {sante}");
             }
-            else
-            {
-                sante = "-"; // Assigner "-" si la plante est null
-            }
-
-            Console.WriteLine($"[{x},{y}] - {nom} sur {sol} – Santé : {sante}");
         }
+    }
+
+    if (!planteTrouvee)
+    {
+        Console.WriteLine("Aucune plante dans le potager.");
     }
 }
 
 
-    public void AfficherGrille() 
+
+    public void AfficherGrille()  
 {
-    Console.OutputEncoding = System.Text.Encoding.UTF8;
-    Console.Clear();
     Console.WriteLine("\n🌿 VUE DU POTAGER 🌿\n");
 
     // En-tête X
@@ -159,7 +153,6 @@ public class Potager
 
     for (int y = 0; y < Hauteur; y++)
     {
-        // Ligne de données
         Console.Write($" {y:D2} │");
         for (int x = 0; x < Largeur; x++)
         {
@@ -226,13 +219,14 @@ public class Potager
                 }
             }
 
-            Console.Write($" {symbole} ");
+            // Affichage fixe sur 3 colonnes
+            Console.Write($" {symbole.PadRight(2)} ");
             Console.ResetColor();
             Console.Write("│");
         }
         Console.WriteLine();
 
-        // Bordure intermédiaire ou inférieure
+        // Bordure intermédiaire
         if (y < Hauteur - 1)
         {
             Console.Write("    ├");
@@ -254,8 +248,10 @@ public class Potager
     }
     Console.WriteLine("┘");
 
+    // Légende
     Console.WriteLine("\nLégende : 🍅 Tomate | 🥕 Carotte | 🥬 Salade | 🧅 Oignon | 🌽 Maïs | 🌻 Tournesol | 🍍 Ananas | 🍓 Fraise | 🥔 Patate | 🌹 Rose | 🥒 Courgette | 🟫 Vide\n");
 }
+
 
 
 
