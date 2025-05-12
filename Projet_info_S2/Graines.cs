@@ -1,6 +1,5 @@
 public class Graines
 {
-    // Dictionnaire avec : NomPlante => Quantité
     private Dictionary<string, int> stock = new Dictionary<string, int>();
 
     // Ajouter une ou plusieurs graines

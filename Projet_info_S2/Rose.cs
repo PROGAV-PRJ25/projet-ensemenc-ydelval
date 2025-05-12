@@ -5,7 +5,7 @@ public class Rose : Plante
         Nom = "Rose";
         Type = "Vivace";
         TerrainPrefere = "Terre";
-        SaisonsDeSemis = new List<string> { "printemps", "automne" };
+        SaisonsDeSemis.AddRange(new List<string> { "printemps", "automne" });
         Espacement = 0.4;
         PlaceNecessairePourGrandir = 1.0;
         VitesseCroissance = 0.3;

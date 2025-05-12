@@ -5,7 +5,7 @@ public class Carotte : Plante
         Nom = "Carotte";
         Type = "Annuelle";
         TerrainPrefere = "Sable";
-        SaisonsDeSemis = new List<string> { "printemps", "été" };
+        SaisonsDeSemis.AddRange(new List<string> { "printemps", "été" });
         Espacement = 0.1;
         PlaceNecessairePourGrandir = 0.2;
         VitesseCroissance = 0.5;
