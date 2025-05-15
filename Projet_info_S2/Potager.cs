@@ -83,20 +83,36 @@ public class Potager
         return true;
     }
 
-    public void EvaluerPlantes(Meteo meteo)
+  public void EvaluerPlantes(Meteo meteo)
+{
+    bool planteMorte = false;
+
+    for (int y = 0; y < Hauteur; y++)
     {
-        for (int y = 0; y < Hauteur; y++)
+        for (int x = 0; x < Largeur; x++)
         {
-            for (int x = 0; x < Largeur; x++)
+            var parcelle = Grille[y, x];
+            if (parcelle.Plante != null)
             {
-                var parcelle = Grille[y, x];
-                if (parcelle.Plante != null)
+                parcelle.Plante.Evaluer(meteo, parcelle.Terrain);
+
+                if (parcelle.Plante.EstMorte())
                 {
-                    parcelle.Plante.Evaluer(meteo, parcelle.Terrain);
+                    Console.WriteLine($"⚠️ La plante {parcelle.Plante.Nom} en ({x},{y}) est morte et sera supprimée du potager.");
+                    parcelle.Plante = null;
+                    planteMorte = true;
                 }
             }
         }
     }
+
+    if (planteMorte)
+    {
+        Console.WriteLine("\nVoici l'état du potager après suppression des plantes mortes :");
+        AfficherGrille();  // Assure-toi que cette méthode affiche bien le potager
+    }
+}
+
 
 public void AfficherEtat()
 {

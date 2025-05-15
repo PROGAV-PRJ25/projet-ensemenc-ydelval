@@ -5,7 +5,7 @@ public abstract class Plante
     public string Type { get; set; } // Annuelle, Vivace, etc.
     public List<string> SaisonsDeSemis { get; set; } = new List<string>();
     public double Espacement { get; set; }
-    public string TerrainPrefere { get; set;}
+    public string TerrainPrefere { get; set; }
     public double PlaceNecessairePourGrandir { get; set; }
     public double VitesseCroissance { get; set; }
     public double BesoinEau { get; set; }
@@ -18,9 +18,9 @@ public abstract class Plante
     public int Sante { get; set; } // 0-100
     public List<string> MaladiesActives { get; set; } = new List<string>();
     public bool EstBlessee => Sante < 100 && Sante > 0;  //   savoir si une plante est blessée
-    private bool SoinEffectueCeTour = false ; 
+    private bool SoinEffectueCeTour = false;
     public double CroissanceActuelle { get; set; } = 0; // 0 à 1 permet de savoir si l'on peut ou non récolter la plante 
-    public bool EstMure => CroissanceActuelle >= 1 && Sante > 0 ; 
+    public bool EstMure => CroissanceActuelle >= 1 && Sante > 0;
     //  Méthode pour soigner une plante
     public void Soigner()
     {
@@ -36,7 +36,7 @@ public abstract class Plante
         if (Sante > 100) Sante = 100;
 
         Console.WriteLine($"{Nom} a été soignée. Santé : {santeInitiale} → {Sante}");
-        SoinEffectueCeTour = true ; 
+        SoinEffectueCeTour = true;
     }
 
     // Interaction utilisateur pour proposer un soin
@@ -44,21 +44,21 @@ public abstract class Plante
     {
         if (EstBlessee)
         {
-            if(MaladiesActives != null && MaladiesActives.Count != 0 )
+            if (MaladiesActives != null && MaladiesActives.Count != 0)
             {
                 Console.WriteLine($"{Nom} est affaiblie. Souhaitez-vous la soigner ? Tapez 'soigner' pour lui administrer un soin.");
-            string reponse = Console.ReadLine();
-            if (reponse != null && reponse.Trim().ToLower() == "soigner")
-            {
-                Soigner();
-            }
-            else
-            {
-                Console.WriteLine($"{Nom} n'a pas été soignée.");
-            }
+                string reponse = Console.ReadLine();
+                if (reponse != null && reponse.Trim().ToLower() == "soigner")
+                {
+                    Soigner();
+                }
+                else
+                {
+                    Console.WriteLine($"{Nom} n'a pas été soignée.");
+                }
 
             }
-            
+
         }
     }
 
@@ -85,13 +85,13 @@ public abstract class Plante
         {
             conditionsFavorables++;
         }
-    // Croissance
-    if (Sante > 70)
-    {
-        VitesseCroissance += 0.1;
-        CroissanceActuelle += VitesseCroissance;
-        Console.WriteLine($"{Nom} pousse bien.");
-    }
+        // Croissance
+        if (Sante > 70)
+        {
+            VitesseCroissance += 0.1;
+            CroissanceActuelle += VitesseCroissance;
+            Console.WriteLine($"{Nom} pousse bien.");
+        }
 
         //  Lumière
         if (meteo.Ensoleillement < BesoinLumiere)
@@ -111,7 +111,7 @@ public abstract class Plante
             Console.WriteLine($"{Nom} n’a pas reçu assez d’eau ({meteo.Precipitations}mm).");
         }
         else if (meteo.Precipitations > BesoinEau * 1.5)
-        
+
         {
             Sante -= 5;
             Console.WriteLine($"{Nom} a trop d’eau ({meteo.Precipitations}mm).");
@@ -134,16 +134,16 @@ public abstract class Plante
 
         //  Maladies
         foreach (var maladie in MaladiesProbabilites)
-{
-    if (new Random().NextDouble() < maladie.Value)
-    {
-        if (!MaladiesActives.Contains(maladie.Key))
         {
-            MaladiesActives.Add(maladie.Key);
-            Console.WriteLine($"{Nom} a été touchée par la maladie : {maladie.Key}.");
+            if (new Random().NextDouble() < maladie.Value)
+            {
+                if (!MaladiesActives.Contains(maladie.Key))
+                {
+                    MaladiesActives.Add(maladie.Key);
+                    Console.WriteLine($"{Nom} a été touchée par la maladie : {maladie.Key}.");
+                }
+            }
         }
-    }
-}
 
         //  Intempéries
         if (meteo.Intemperies && new Random().NextDouble() < 0.3)
@@ -190,7 +190,7 @@ public abstract class Plante
         {
             Console.WriteLine($"Santé de {Nom} : {santeInitiale} → {Sante}");
         }
-        if (EstBlessee && SoinEffectueCeTour == true )
+        if (EstBlessee && SoinEffectueCeTour == true)
         {
             Sante -= 10;
             Console.WriteLine($"{Nom} n'a pas été soignée et s'affaiblit davantage. Santé -10.");
@@ -201,7 +201,12 @@ public abstract class Plante
             }
         }
 
+
         // Proposer un soin à la fin de l’évaluation si la plante est malade
-        ProposerSoin(); 
+        ProposerSoin();
     }
+    public bool EstMorte()
+{
+    return Sante <= 0;
+}
 }
