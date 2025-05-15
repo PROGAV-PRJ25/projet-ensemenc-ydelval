@@ -14,7 +14,7 @@ public class Rose : Plante
         TemperatureMin = 5;
         TemperatureMax = 30;
         EsperanceDeVie = 5; // en années si tu veux simuler long terme
-        Production = 0; // pas comestible
+        Production = 2; // pas comestible
         Sante = 100;
         MaladiesProbabilites.Add("Oïdium", 0.1);
         MaladiesProbabilites.Add("Taches noires", 0.08 );

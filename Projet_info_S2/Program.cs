@@ -75,6 +75,7 @@ class Program
             Console.WriteLine("-------------------------");
 
             potager.AfficherEtat();
+            potager.ProposerRecolte();
 
             Console.WriteLine("\nAppuyez sur Entrée pour continuer...");
             Console.ReadLine();
@@ -183,7 +184,7 @@ class Program
                     int rx = int.Parse(Console.ReadLine()!);
                     Console.WriteLine("Coordonnées Y : ");
                     int ry = int.Parse(Console.ReadLine()!);
-                    potager.Recolter(rx, ry);
+                    potager.Recolter(rx, ry,graines);
                     break;
                 case "3":
                     meteo.IncrementeJour();

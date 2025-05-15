@@ -307,7 +307,7 @@ public void AfficherEtat()
     return recoltePossible;
 }
 
-public void Recolter(int x, int y)
+public void Recolter(int x, int y, Graines graines)
 {
     var parcelle = Grille[y, x];
 
@@ -328,6 +328,7 @@ public void Recolter(int x, int y)
     int quantiteRecoltee = plante.Production;
     Console.WriteLine($"youhou Vous avez récolté {quantiteRecoltee} {plante.Nom}(s) à ({x},{y}).");
 
+    graines.Ajouter(plante.Nom.ToLower(), quantiteRecoltee);
     ReinitialiserApresRecolte(plante);
 }
 
