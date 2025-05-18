@@ -10,11 +10,12 @@ public class Rose : Plante
         PlaceNecessairePourGrandir = 1.0;
         VitesseCroissance = 0.3;
         BesoinEau = 6;
-        BesoinLumiere = 0.55;
+        BesoinLumiere = 0.7;
         TemperatureMin = 5;
         TemperatureMax = 30;
-        EsperanceDeVie = 5; // en années si tu veux simuler long terme
-        Production = 2; // pas comestible
+        EsperanceDeVie = 36; 
+        QuantiteFruits = 0;
+        GrainesParFruit = 2;
         Sante = 100;
         MaladiesProbabilites.Add("Oïdium", 0.1);
         MaladiesProbabilites.Add("Taches noires", 0.08 );

@@ -13,8 +13,9 @@ public abstract class Plante
     public double TemperatureMin { get; set; }
     public double TemperatureMax { get; set; }
     public Dictionary<string, double> MaladiesProbabilites { get; set; } = new Dictionary<string, double>();
-    public double EsperanceDeVie { get; set; } // en jours
-    public int Production { get; set; } // nombre de fruits/légumes
+    public double EsperanceDeVie { get; set; } // en semaines
+    public int QuantiteFruits { get; set; }
+    public int GrainesParFruit { get; set; }
     public int Sante { get; set; } // 0-100
     public List<string> MaladiesActives { get; set; } = new List<string>();
     public bool EstBlessee => Sante < 100 && Sante > 0;  //   savoir si une plante est blessée
@@ -204,6 +205,8 @@ public abstract class Plante
 
         // Proposer un soin à la fin de l’évaluation si la plante est malade
         ProposerSoin();
+
+        SoinEffectueCeTour = false;
     }
     public bool EstMorte()
 {

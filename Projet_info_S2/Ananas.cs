@@ -4,17 +4,18 @@ public class Ananas : Plante
     {
         Nom = "Ananas";
         Type = "Vivace";
-        SaisonsDeSemis.AddRange(new List<string> { "Printemps" });
-        Espacement = 0.5;
+        SaisonsDeSemis.AddRange(new List<string> { "printemps", "été" });
+        Espacement = 1;
         TerrainPrefere = "Sable";
-        PlaceNecessairePourGrandir = 1.2;
-        VitesseCroissance = 0.6;
-        BesoinEau = 0.8;
-        BesoinLumiere = 1.0;
+        PlaceNecessairePourGrandir = 1.5;
+        VitesseCroissance = 0.5;
+        BesoinEau = 8;
+        BesoinLumiere = 0.8;
         TemperatureMin = 20.0;
         TemperatureMax = 35.0;
-        EsperanceDeVie = 1095.0; // 3 ans
-        Production = 1;
+        EsperanceDeVie = 30.0; // 3 ans
+        QuantiteFruits = 1;
+        GrainesParFruit = 5;
         Sante = 100;
 
         MaladiesProbabilites.Add("Pourriture du cœur", 0.2);

@@ -6,14 +6,14 @@ public class Meteo
     public double Ensoleillement { get; private set; } // 0.0 à 1.0
     public bool Intemperies { get; private set; } // True si événement météo fort
     public string EvenementSpecial { get; private set; } // "Gel", "Grêle", etc.
-    public int JourActuel { get; private set; }
+    public int SemaineActuelle { get; private set; }
 
     private Random random = new Random();
 
     public Meteo(string saison)
     {
         SaisonActuelle = saison;
-        JourActuel = 1;
+        SemaineActuelle = 1;
         GenererConditions();
     }
 
@@ -26,7 +26,7 @@ public class Meteo
         {
             case "printemps":
                 Temperature = random.Next(10, 20);
-                Precipitations = random.Next(2, 10);
+                Precipitations = random.Next(10, 50);
                 Ensoleillement = random.NextDouble() * 0.7 + 0.3;
                 if (random.NextDouble() < 0.1)
                 {
@@ -37,7 +37,7 @@ public class Meteo
 
             case "été":
                 Temperature = random.Next(20, 35);
-                Precipitations = random.Next(0, 5);
+                Precipitations = random.Next(0, 25);
                 Ensoleillement = random.NextDouble() * 0.3 + 0.7;
                 if (random.NextDouble() < 0.1)
                 {
@@ -48,7 +48,7 @@ public class Meteo
 
             case "automne":
                 Temperature = random.Next(5, 18);
-                Precipitations = random.Next(5, 15);
+                Precipitations = random.Next(20, 60);
                 Ensoleillement = random.NextDouble() * 0.6;
                 if (random.NextDouble() < 0.1)
                 {
@@ -59,7 +59,7 @@ public class Meteo
 
             case "hiver":
                 Temperature = random.Next(-5, 10);
-                Precipitations = random.Next(1, 8);
+                Precipitations = random.Next(5,30);
                 Ensoleillement = random.NextDouble() * 0.4;
                 if (random.NextDouble() < 0.1)
                 {
@@ -73,18 +73,18 @@ public class Meteo
         }
     }
 
-    public void IncrementeJour()
+    public void IncrementerSemaine()
     {
-        JourActuel++;
-        if (JourActuel > 30)
+        SemaineActuelle++;
+        if (SemaineActuelle > 12)
         {
-            JourActuel = 1; // Réinitialiser à 1 pour nouvelle saison
+            SemaineActuelle = 1; // Réinitialiser à 1 pour nouvelle saison
             SaisonActuelle = SaisonSuivante(SaisonActuelle);
             GenererConditions(); // Génère nouvelles conditions météo
         }
         else
         {
-            GenererConditions(); // Génère les conditions du jour suivant
+            GenererConditions(); // Génère les conditions la semaine suivante
         }
     }
 

@@ -13,8 +13,9 @@ public class Salade : Plante
         BesoinLumiere = 0.6;
         TemperatureMin = 5.0;
         TemperatureMax = 22.0;
-        EsperanceDeVie = 60.0;
-        Production = 1;
+        EsperanceDeVie = 5;
+        QuantiteFruits = 3;
+        GrainesParFruit = 50;
         Sante = 100;
 
         MaladiesProbabilites.Add("Fonte des semis", 0.1);

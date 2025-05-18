@@ -4,17 +4,18 @@ public class Oignon: Plante
     {
         Nom = "Oignon";
         Type = "Bisannuelle"; 
-        SaisonsDeSemis.AddRange(new List<string> { "Printemps", "Automne" });
+        SaisonsDeSemis.AddRange(new List<string> { "printemps", "automne" });
         Espacement = 3.0;
         TerrainPrefere = "Terre";
-        PlaceNecessairePourGrandir = 3.0;
+        PlaceNecessairePourGrandir = 0.5;
         VitesseCroissance = 0.4;
-        BesoinEau = 0.7;
-        BesoinLumiere = 1.0;
+        BesoinEau = 5;
+        BesoinLumiere = 0.8;
         TemperatureMin = 4.0;
         TemperatureMax = 30.0;
-        EsperanceDeVie = 365.0; 
-        Production = 4; 
+        EsperanceDeVie = 10.0; 
+        QuantiteFruits = 1;
+        GrainesParFruit = 10;
         Sante = 100;
 
         MaladiesProbabilites.Add("Mildiou", 0.15);

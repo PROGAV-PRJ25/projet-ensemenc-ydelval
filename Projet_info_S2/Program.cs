@@ -4,6 +4,8 @@ using System.Collections.Generic;
 class Program
 {
     static Graines graines = new Graines();
+    static Fruits fruits = new Fruits();
+
 
     static void Main()
     {
@@ -66,7 +68,7 @@ class Program
 
             // Affichage météo + état potager
             Console.WriteLine($"\n--- Météo et état du potager ---");
-            Console.WriteLine($"Jour {meteo.JourActuel} - Saison : {meteo.SaisonActuelle}");
+            Console.WriteLine($"Semaine {meteo.SemaineActuelle} - Saison : {meteo.SaisonActuelle}");
             Console.WriteLine($"Température : {meteo.Temperature} °C");
             Console.WriteLine($"Précipitations : {meteo.Precipitations} mm");
             Console.WriteLine($"Ensoleillement : {meteo.Ensoleillement:F2} (de 0 à 1)");
@@ -86,7 +88,9 @@ class Program
             Console.WriteLine("2. Récolter");
             Console.WriteLine("3. Passer au jour suivant");
             Console.WriteLine("4. Afficher graines");
-            Console.WriteLine("5. Soigner une plante");
+            Console.WriteLine("5. Afficher fruits");
+            Console.WriteLine("6. Afficher le type de sol");
+            Console.WriteLine("7. Soigner une plante");
             Console.WriteLine("0. Quitter");
             Console.WriteLine("\nAppuyez sur Entrée pour continuer...");
             Console.ReadLine();
@@ -152,7 +156,8 @@ class Program
                             default:
                                 plante = null;
                                 break;
-                        };
+                        }
+                        ;
                         if (plante == null)
                         {
                             Console.WriteLine("Plante inconnue");
@@ -184,16 +189,27 @@ class Program
                     int rx = int.Parse(Console.ReadLine()!);
                     Console.WriteLine("Coordonnées Y : ");
                     int ry = int.Parse(Console.ReadLine()!);
-                    potager.Recolter(rx, ry,graines);
+                    potager.Recolter(rx, ry, graines, fruits);
                     break;
                 case "3":
-                    meteo.IncrementeJour();
+                    meteo.IncrementerSemaine();
                     potager.EvaluerPlantes(meteo);
                     break;
                 case "4":
                     graines.Afficher();
                     break;
                 case "5":
+                    fruits.Afficher();
+                    break;
+                case "6":
+                    Console.WriteLine("Coordonnées X : ");
+                        int tx = int.Parse(Console.ReadLine()!);
+                        Console.WriteLine("Coordonnées Y : ");
+                        int ty = int.Parse(Console.ReadLine()!);
+
+                    potager.AfficherTypeSol(tx, ty);
+                    break;
+                case "7":
                     Console.WriteLine("Coordonnées X de la plante à soigner : ");
                     int sx = int.Parse(Console.ReadLine()!);
                     Console.WriteLine("Coordonnées Y de la plante à soigner : ");

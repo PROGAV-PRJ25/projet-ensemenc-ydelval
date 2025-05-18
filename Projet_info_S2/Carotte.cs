@@ -4,17 +4,18 @@ public class Carotte : Plante
     {
         Nom = "Carotte";
         Type = "Annuelle";
-        TerrainPrefere = "Sable";
+        TerrainPrefere = "Argile";
         SaisonsDeSemis.AddRange(new List<string> { "printemps", "été" });
-        Espacement = 0.1;
-        PlaceNecessairePourGrandir = 0.2;
-        VitesseCroissance = 0.5;
-        BesoinEau = 5;
-        BesoinLumiere = 0.5;
+        Espacement = 0.2;
+        PlaceNecessairePourGrandir = 0.4;
+        VitesseCroissance = 1;
+        BesoinEau = 6;
+        BesoinLumiere = 0.6;
         TemperatureMin = 8;
         TemperatureMax = 28;
-        EsperanceDeVie = 0.4;
-        Production = 3;
+        EsperanceDeVie = 12;
+        QuantiteFruits = 1;
+        GrainesParFruit = 10;
         Sante = 100;
         MaladiesProbabilites.Add("Mouche de la carotte", 0.1 );
     }

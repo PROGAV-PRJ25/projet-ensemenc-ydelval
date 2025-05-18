@@ -8,13 +8,14 @@ public class Tomate : Plante
         Espacement = 0.4;
         TerrainPrefere = "Terre";
         PlaceNecessairePourGrandir = 0.8;
-        VitesseCroissance = 1.2;
-        BesoinEau = 0.8;
+        VitesseCroissance = 0.2;
+        BesoinEau = 10;
         BesoinLumiere = 0.9;
         TemperatureMin = 15.0;
         TemperatureMax = 30.0;
-        EsperanceDeVie = 90.0;
-        Production = 10;
+        EsperanceDeVie = 13.0;
+        QuantiteFruits = 10;
+        GrainesParFruit = 2;
         Sante = 100;
 
         MaladiesProbabilites.Add("Mildiou", 0.3);
