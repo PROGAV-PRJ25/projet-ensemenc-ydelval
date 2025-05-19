@@ -9,12 +9,12 @@ public class Rose : Plante
         Espacement = 0.4;
         PlaceNecessairePourGrandir = 1.0;
         VitesseCroissance = 0.3;
-        BesoinEau = 6;
+        BesoinEau = 30;
         BesoinLumiere = 0.7;
         TemperatureMin = 5;
         TemperatureMax = 30;
         EsperanceDeVie = 36; 
-        QuantiteFruits = 0;
+        QuantiteFruits = 1;
         GrainesParFruit = 2;
         Sante = 100;
         MaladiesProbabilites.Add("Oïdium", 0.1);

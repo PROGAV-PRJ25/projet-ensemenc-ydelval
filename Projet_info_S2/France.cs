@@ -13,6 +13,7 @@ public class France : Pays
             typeof(Carotte),
             typeof(Rose),
             typeof(Mais),
+            typeof(Salade)
         };
     }
 

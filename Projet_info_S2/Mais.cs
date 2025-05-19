@@ -9,7 +9,7 @@ public class Mais : Plante
         Espacement = 0.4;
         PlaceNecessairePourGrandir = 1.0;
         VitesseCroissance = 0.9;
-        BesoinEau = 8;
+        BesoinEau = 40;
         BesoinLumiere = 0.8;
         TemperatureMin = 15;
         TemperatureMax = 35;

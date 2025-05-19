@@ -9,7 +9,7 @@ public class Carotte : Plante
         Espacement = 0.2;
         PlaceNecessairePourGrandir = 0.4;
         VitesseCroissance = 1;
-        BesoinEau = 6;
+        BesoinEau = 25;
         BesoinLumiere = 0.6;
         TemperatureMin = 8;
         TemperatureMax = 28;

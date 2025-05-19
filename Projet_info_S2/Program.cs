@@ -47,7 +47,7 @@ class Program
         Console.WriteLine("Largeur :");
         int largeur = int.Parse(Console.ReadLine()!);
 
-        Potager potager = new Potager(hauteur, largeur);
+        Potager potager = new Potager(largeur, hauteur);
 
         // Boucle de jeu
         while (true)
@@ -78,19 +78,19 @@ class Program
 
             potager.AfficherEtat();
             potager.ProposerRecolte();
+            potager.AfficherPlantesAssoiffees(meteo);
 
-            Console.WriteLine("\nAppuyez sur Entrée pour continuer...");
-            Console.ReadLine();
 
             // Affichage propositions (planter, soigner, récolter, etc)
             Console.WriteLine("\n===== Menu Principal =====");
             Console.WriteLine("1. Planter");
             Console.WriteLine("2. Récolter");
-            Console.WriteLine("3. Passer au jour suivant");
+            Console.WriteLine("3. Passer à la semaine suivante");
             Console.WriteLine("4. Afficher graines");
             Console.WriteLine("5. Afficher fruits");
             Console.WriteLine("6. Afficher le type de sol");
             Console.WriteLine("7. Soigner une plante");
+            Console.WriteLine("8. Arroser une plante");
             Console.WriteLine("0. Quitter");
             Console.WriteLine("\nAppuyez sur Entrée pour continuer...");
             Console.ReadLine();
@@ -98,10 +98,6 @@ class Program
             // Affichage potager
             Console.WriteLine("\n--- Potager ---");
             potager.AfficherGrille();
-
-            Console.WriteLine("\nAppuyez sur Entrée pour continuer...");
-            Console.ReadLine();
-            potager.EvaluerPlantes(meteo);
 
             // Lecture choix utilisateur
             Console.Write("Choix : ");
@@ -202,12 +198,7 @@ class Program
                     fruits.Afficher();
                     break;
                 case "6":
-                    Console.WriteLine("Coordonnées X : ");
-                        int tx = int.Parse(Console.ReadLine()!);
-                        Console.WriteLine("Coordonnées Y : ");
-                        int ty = int.Parse(Console.ReadLine()!);
-
-                    potager.AfficherTypeSol(tx, ty);
+                    potager.AfficherTypesSols();
                     break;
                 case "7":
                     Console.WriteLine("Coordonnées X de la plante à soigner : ");
@@ -224,6 +215,29 @@ class Program
                         Console.WriteLine("Aucune plante à cet endroit.");
                     }
                     break;
+                    case "8":
+                        Console.WriteLine("Coordonnées X de la plante à arroser : ");
+                        int ax = int.Parse(Console.ReadLine()!);
+                        Console.WriteLine("Coordonnées Y de la plante à arroser : ");
+                        int ay = int.Parse(Console.ReadLine()!);
+                        var planteAAroser = potager.Grille[ay, ax].Plante;
+                    if (planteAAroser != null)
+                    {
+                        if (planteAAroser.ASoif)
+                        {
+                            planteAAroser.Sante += 10;
+                            if (planteAAroser.Sante > 100)
+                            { planteAAroser.Sante = 100; }
+                            planteAAroser.ASoif = false;
+                            Console.WriteLine($"{planteAAroser.Nom} a été arrosée. Santé améliorée !");
+                        }
+                        else
+                        { Console.WriteLine($"{planteAAroser.Nom} n'a pas besoin d'eau"); }
+                    }
+                    else
+                    { Console.WriteLine("Aucune plante à cet endroit"); }
+                    break;
+
                 case "0":
                     Console.WriteLine("👋 Merci d'avoir joué !");
                     return;

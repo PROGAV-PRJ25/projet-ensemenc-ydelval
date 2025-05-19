@@ -268,19 +268,55 @@ public void AfficherEtat()
     Console.WriteLine("\nLégende : 🍅 Tomate | 🥕 Carotte | 🥬 Salade | 🧅 Oignon | 🌽 Maïs | 🌻 Tournesol | 🍍 Ananas | 🍓 Fraise | 🥔 Patate | 🌹 Rose | 🥒 Courgette | 🟫 Vide\n");
 }
 
-
-
-
-    public void AfficherTypeSol(int x, int y)
+    public void AfficherPlantesAssoiffees(Meteo meteo)
     {
-        if (x < 0 || x >= Largeur || y < 0 || y >= Hauteur)
+        bool besoin = false;
+        for (int y = 0; y < Hauteur; y++)
         {
-            Console.WriteLine("❌ Coordonnées invalides !");
-            return;
+            for (int x = 0; x < Largeur; x++)
+            {
+                var plante = Grille[y, x].Plante;
+                if (plante != null && plante.DoitEtreArrosee(meteo.Precipitations) && !plante.ASoif)
+                {
+                    Console.WriteLine($"💧 {plante.Nom} en ({x},{y}) semble avoir soif.");
+                    plante.ASoif = true; // Marque comme assoiffée, permet d'arroser plus tard
+                    besoin = true;
+                }
+            }
         }
 
-        var typeSol = Grille[y, x].Terrain.TypeSol;
-        Console.WriteLine($"📍 La parcelle ({x}, {y}) est de type : {typeSol}");
+        if (!besoin)
+            Console.WriteLine("✅ Aucune plante ne semble avoir besoin d’eau pour le moment.");
+    }
+
+
+    public void AfficherTypesSols()
+    {
+        Console.WriteLine("\n🧱 Répartition des types de terrain dans le potager :");
+
+        Dictionary<string, List<(int x, int y)>> repartition = new();
+
+        for (int y = 0; y < Hauteur; y++)
+        {
+            for (int x = 0; x < Largeur; x++)
+            {
+                string typeSol = Grille[y, x].Terrain.TypeSol;
+
+                if (!repartition.ContainsKey(typeSol))
+                    repartition[typeSol] = new List<(int, int)>();
+
+                repartition[typeSol].Add((x, y));
+            }
+        }
+        foreach (var ter in repartition)
+        {
+            Console.WriteLine($"\n {ter.Key} :");
+            foreach (var (x, y) in ter.Value)
+            {
+                Console.WriteLine($"({x},{y})");
+            }
+            Console.WriteLine();
+        }
     }
    public bool ProposerRecolte()
 {
@@ -327,7 +363,7 @@ public void Recolter(int x, int y, Graines graines, Fruits fruits)
 
         int nbFruits = plante.QuantiteFruits;
         int grainesTotal = nbFruits * plante.GrainesParFruit;
-    Console.WriteLine($"youhou Vous avez récolté {nbFruits} et obtenu {grainesTotal} de {plante.Nom}(s) à ({x},{y}).");
+    Console.WriteLine($"youhou Vous avez récolté {nbFruits} fruits et obtenu {grainesTotal} graines de {plante.Nom}(s) à ({x},{y}).");
 
     graines.Ajouter(plante.Nom.ToLower(), grainesTotal);
     fruits.Ajouter(plante.Nom.ToLower(), nbFruits);

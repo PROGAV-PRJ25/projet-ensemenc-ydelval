@@ -9,7 +9,7 @@ public class Fraise : Plante
         TerrainPrefere = "Terre";
         PlaceNecessairePourGrandir = 0.5;
         VitesseCroissance = 1.0;
-        BesoinEau = 7;
+        BesoinEau = 30;
         BesoinLumiere = 0.7;
         TemperatureMin = 10.0;
         TemperatureMax = 25.0;

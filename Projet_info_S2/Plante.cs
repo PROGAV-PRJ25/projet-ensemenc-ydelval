@@ -8,8 +8,8 @@ public abstract class Plante
     public string TerrainPrefere { get; set; }
     public double PlaceNecessairePourGrandir { get; set; }
     public double VitesseCroissance { get; set; }
-    public double BesoinEau { get; set; }
-    public double BesoinLumiere { get; set; }
+    public double BesoinEau { get; set; } //en mm/semaine
+    public double BesoinLumiere { get; set; } // de 0 à 1
     public double TemperatureMin { get; set; }
     public double TemperatureMax { get; set; }
     public Dictionary<string, double> MaladiesProbabilites { get; set; } = new Dictionary<string, double>();
@@ -22,6 +22,13 @@ public abstract class Plante
     private bool SoinEffectueCeTour = false;
     public double CroissanceActuelle { get; set; } = 0; // 0 à 1 permet de savoir si l'on peut ou non récolter la plante 
     public bool EstMure => CroissanceActuelle >= 1 && Sante > 0;
+    public bool ASoif { get; set; } = false;
+    public bool DoitEtreArrosee(double precipitations)
+    {
+        return precipitations < BesoinEau * 0.8;
+    }
+    public bool ASeteSoifLaSemaineDerniere { get; set; } = false;
+    
     //  Méthode pour soigner une plante
     public void Soigner()
     {
@@ -64,6 +71,7 @@ public abstract class Plante
     }
 
     //  Évaluation quotidienne de la plante selon météo et terrain
+
     public void Evaluer(Meteo meteo, Terrain terrain)
     {
         if (Sante <= 0)
@@ -108,9 +116,10 @@ public abstract class Plante
         //  Eau
         if (meteo.Precipitations < BesoinEau * 0.8)
         {
-            Sante -= 10;
+            ASoif = true;
             Console.WriteLine($"{Nom} n’a pas reçu assez d’eau ({meteo.Precipitations}mm).");
         }
+
         else if (meteo.Precipitations > BesoinEau * 1.5)
 
         {
@@ -200,6 +209,13 @@ public abstract class Plante
                 Sante = 0;
                 Console.WriteLine($"{Nom} est morte par négligence.");
             }
+        }
+        //Permet au joueur d'avoir le temps d'arroser
+        if (ASoif)
+        {
+            Sante -= 10;
+            Console.WriteLine($"{Nom} n'a pas été arrosée et souffre de sécheresse. Santé -10.");
+            ASoif = false;
         }
 
 

@@ -9,7 +9,7 @@ public class Ananas : Plante
         TerrainPrefere = "Sable";
         PlaceNecessairePourGrandir = 1.5;
         VitesseCroissance = 0.5;
-        BesoinEau = 8;
+        BesoinEau = 40;
         BesoinLumiere = 0.8;
         TemperatureMin = 20.0;
         TemperatureMax = 35.0;

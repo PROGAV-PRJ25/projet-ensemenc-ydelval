@@ -9,7 +9,7 @@ public class Oignon: Plante
         TerrainPrefere = "Terre";
         PlaceNecessairePourGrandir = 0.5;
         VitesseCroissance = 0.4;
-        BesoinEau = 5;
+        BesoinEau = 20;
         BesoinLumiere = 0.8;
         TemperatureMin = 4.0;
         TemperatureMax = 30.0;

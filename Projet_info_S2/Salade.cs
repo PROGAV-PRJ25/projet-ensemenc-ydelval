@@ -9,7 +9,7 @@ public class Salade : Plante
         TerrainPrefere = "Terre";
         PlaceNecessairePourGrandir = 0.4;
         VitesseCroissance = 1.5;
-        BesoinEau = 0.6;
+        BesoinEau = 25;
         BesoinLumiere = 0.6;
         TemperatureMin = 5.0;
         TemperatureMax = 22.0;

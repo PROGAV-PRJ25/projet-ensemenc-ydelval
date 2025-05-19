@@ -9,8 +9,8 @@ public class Tomate : Plante
         TerrainPrefere = "Terre";
         PlaceNecessairePourGrandir = 0.8;
         VitesseCroissance = 0.2;
-        BesoinEau = 10;
-        BesoinLumiere = 0.9;
+        BesoinEau = 30;
+        BesoinLumiere = 0.8;
         TemperatureMin = 15.0;
         TemperatureMax = 30.0;
         EsperanceDeVie = 13.0;
