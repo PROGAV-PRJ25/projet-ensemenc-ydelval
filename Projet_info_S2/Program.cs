@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
-
-class Program
+﻿class Program
 {
     static Graines graines = new Graines();
     static Fruits fruits = new Fruits();
