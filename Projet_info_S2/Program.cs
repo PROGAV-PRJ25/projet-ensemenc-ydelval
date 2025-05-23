@@ -6,10 +6,47 @@ class Program
 {
     static Graines graines = new Graines();
     static Fruits fruits = new Fruits();
+    static void ActiverModeUrgence(Potager potager)
+{
+    Console.WriteLine("\n🚨 URGENCE DANS LE POTAGER ! 🚨");
 
+    // Choix aléatoire entre une grêle ou un intrus
+    Random rand = new Random();
+    int evenement = rand.Next(2);
+
+    if (evenement == 0)
+    {
+        Console.WriteLine("🌨️ Une violente tempête de grêle s’abat sur votre potager !");
+        Console.WriteLine("Souhaitez-vous déployer une bâche de protection ? (oui/non)");
+        string reponse = Console.ReadLine()?.ToLower();
+        if (reponse == "oui")
+        {
+            Console.WriteLine("✅ Vous avez limité les dégâts !");
+        }
+        else
+        {
+            Console.WriteLine("❌ Des plantes ont été blessées...");
+            potager.EndommagerPlantesAleatoirement();
+        }
+    }
+    else
+    {
+        Console.WriteLine("🐭 Un rongeur s’est infiltré et mange vos récoltes !");
+        Console.WriteLine("Souhaitez-vous faire du bruit pour le faire fuir ? (oui/non)");
+        string reponse = Console.ReadLine()?.ToLower();
+        bool defenseActivee = reponse == "oui";
+
+        Console.WriteLine("🔍 Il rôde dans le potager...");
+        potager.AfficherGrille(true);
+
+        // Il vole quand même, mais moins si le joueur agit
+        potager.VolDeFruitsAleatoire(defenseActivee);
+    }
+}
 
     static void Main()
     {
+
         Console.WriteLine("Bienvenue dans votre potager!");
 
         France france = new France();
@@ -49,19 +86,22 @@ class Program
         Console.WriteLine("Largeur :");
         int largeur = int.Parse(Console.ReadLine()!);
 
+        // Affichage règles et ce qu'on peut planter
+        Console.WriteLine("\n--- Règles du jeu ---");
+        Console.WriteLine("- Plantez des graines adaptées à la saison et au terrain.");
+        Console.WriteLine("- Soignez vos plantes pour qu'elles poussent mieux.");
+        Console.WriteLine("- Récoltez au bon moment.");
+        Console.WriteLine("- Surveillez la météo et adaptez-vous.");
+        Console.WriteLine("\nAppuyez sur Entrée pour continuer...");
+        Console.ReadLine();
+
         Potager potager = new Potager(largeur, hauteur);
+
+
 
         // Boucle de jeu
         while (true)
         {
-            // Affichage règles et ce qu'on peut planter
-            Console.WriteLine("\n--- Règles du jeu ---");
-            Console.WriteLine("- Plantez des graines adaptées à la saison et au terrain.");
-            Console.WriteLine("- Soignez vos plantes pour qu'elles poussent mieux.");
-            Console.WriteLine("- Récoltez au bon moment.");
-            Console.WriteLine("- Surveillez la météo et adaptez-vous.");
-            Console.WriteLine("\nAppuyez sur Entrée pour continuer...");
-            Console.ReadLine();
 
             // Affichage météo + état potager
             Console.WriteLine($"\n--- Météo et état du potager ---");
@@ -148,7 +188,7 @@ class Program
                             case "courgette":
                                 plante = new Courgette();
                                 break;
-                                case "tournesol":
+                            case "tournesol":
                                 plante = new Tournesol();
                                 break;
                             default:
@@ -191,6 +231,13 @@ class Program
                     break;
                 case "3":
                     meteo.IncrementerSemaine();
+                    Random rand = new Random();
+                    bool declencherUrgence = rand.NextDouble() < 0.5; // 10% de chance
+                    if (declencherUrgence)
+                    {
+                        ActiverModeUrgence(potager);
+                    }
+
                     potager.EvaluerPlantes(meteo);
                     break;
                 case "4":
@@ -217,12 +264,12 @@ class Program
                         Console.WriteLine("Aucune plante à cet endroit.");
                     }
                     break;
-                    case "8":
-                        Console.WriteLine("Coordonnées X de la plante à arroser : ");
-                        int ax = int.Parse(Console.ReadLine()!);
-                        Console.WriteLine("Coordonnées Y de la plante à arroser : ");
-                        int ay = int.Parse(Console.ReadLine()!);
-                        var planteAAroser = potager.Grille[ay, ax].Plante;
+                case "8":
+                    Console.WriteLine("Coordonnées X de la plante à arroser : ");
+                    int ax = int.Parse(Console.ReadLine()!);
+                    Console.WriteLine("Coordonnées Y de la plante à arroser : ");
+                    int ay = int.Parse(Console.ReadLine()!);
+                    var planteAAroser = potager.Grille[ay, ax].Plante;
                     if (planteAAroser != null)
                     {
                         if (planteAAroser.ASoif)

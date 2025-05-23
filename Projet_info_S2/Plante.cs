@@ -68,11 +68,11 @@ public abstract class Plante
             }
         }
     }
-    public void Arroser()
+    public void Arroser(int x, int y)
     {
         if (Sante <= 0)
         {
-            Console.WriteLine($"{Nom} est morte. Impossible de l'arroser.");
+            Console.WriteLine($"{Nom} ({x},{y}) en  est morte. Impossible de l'arroser.");
             return;
         }
         int gain = 5;
@@ -80,19 +80,19 @@ public abstract class Plante
         Sante += gain;
         if (Sante > 100) Sante = 100;
 
-        Console.WriteLine($"{Nom} a été arrosée.");
+        Console.WriteLine($"{Nom} ({x},{y}) a été arrosée.");
         ASoif = false;
         conditionsFavorables++;
     }
-    public void ProposerArrosage()
+    public void ProposerArrosage(int x, int y)
     {
         if (ASoif)
         {
-            Console.WriteLine($"{Nom} est a soif. Souhaitez-vous l'arroser ? Tapez 'arroser' pour lui administrer l'eau suffisante.");
+            Console.WriteLine($"{Nom} en ({x},{y})est a soif. Souhaitez-vous l'arroser ? Tapez 'arroser' pour lui administrer l'eau suffisante.");
             string reponse = Console.ReadLine().ToLower();
             if (reponse != null && reponse.Trim().ToLower() == "arroser")
             {
-                Arroser();
+                Arroser(x,y);
             }
             else
             {
@@ -104,11 +104,11 @@ public abstract class Plante
 
     //  Évaluation quotidienne de la plante selon météo et terrain
 
-    public void Evaluer(Meteo meteo, Terrain terrain)
+    public void Evaluer(Meteo meteo, Terrain terrain, int x, int y)
     {
         if (Sante <= 0)
         {
-            Console.WriteLine($"{Nom} est morte.");
+            Console.WriteLine($"{Nom} en ({x},{y}) est morte.");
             return;
         }
 
@@ -119,7 +119,7 @@ public abstract class Plante
         if (meteo.Temperature < TemperatureMin || meteo.Temperature > TemperatureMax)
         {
             Sante -= 5;
-            Console.WriteLine($"{Nom} souffre d'une température extrême ({meteo.Temperature}°C).");
+            Console.WriteLine($"{Nom} en ({x},{y}) souffre d'une température extrême ({meteo.Temperature}°C).");
         }
         else
         {
@@ -130,14 +130,14 @@ public abstract class Plante
         {
             VitesseCroissance += 0.1;
             CroissanceActuelle += VitesseCroissance;
-            Console.WriteLine($"{Nom} pousse bien.");
+            Console.WriteLine($"{Nom} en ({x},{y}) pousse bien.");
         }
 
         //  Lumière
         if (meteo.Ensoleillement < BesoinLumiere)
         {
             Sante -= 5;
-            Console.WriteLine($"{Nom} manque de lumière (ensoleillement {meteo.Ensoleillement}).");
+            Console.WriteLine($"{Nom} en ({x},{y}) manque de lumière (ensoleillement {meteo.Ensoleillement}).");
         }
         else
         {
@@ -148,15 +148,15 @@ public abstract class Plante
         if (meteo.Precipitations < BesoinEau * 0.9)
         {
             ASoif = true;
-            Console.WriteLine($"{Nom} n’a pas reçu assez d’eau ({meteo.Precipitations}mm).");
-            ProposerArrosage();
+            Console.WriteLine($"{Nom} en ({x},{y}) n’a pas reçu assez d’eau ({meteo.Precipitations}mm).");
+            ProposerArrosage(x,y);
         }
 
         else if (meteo.Precipitations > BesoinEau * 1.9)
 
         {
             Sante -= 5;
-            Console.WriteLine($"{Nom} a trop d’eau ({meteo.Precipitations}mm).");
+            Console.WriteLine($"{Nom} en ({x},{y}) a trop d’eau ({meteo.Precipitations}mm).");
         }
         else
         {
@@ -167,7 +167,7 @@ public abstract class Plante
         if (terrain.TypeSol != TerrainPrefere)
         {
             Sante -= 10;
-            Console.WriteLine($"{Nom} est mal adaptée au terrain {terrain.TypeSol} (préféré : {TerrainPrefere}).");
+            Console.WriteLine($"{Nom} en ({x},{y}) est mal adaptée au terrain {terrain.TypeSol} (préféré : {TerrainPrefere}).");
         }
         else
         {
@@ -182,7 +182,7 @@ public abstract class Plante
                 if (!MaladiesActives.Contains(maladie.Key))
                 {
                     MaladiesActives.Add(maladie.Key);
-                    Console.WriteLine($"{Nom} a été touchée par la maladie : {maladie.Key}.");
+                    Console.WriteLine($"{Nom} en ({x},{y}) a été touchée par la maladie : {maladie.Key}.");
                 }
             }
         }
@@ -191,7 +191,7 @@ public abstract class Plante
         if (meteo.Intemperies && new Random().NextDouble() < 0.3)
         {
             Sante -= 10;
-            Console.WriteLine($"{Nom} a été endommagée par une intempérie ({meteo.EvenementSpecial}).");
+            Console.WriteLine($"{Nom} en ({x},{y}) a été endommagée par une intempérie ({meteo.EvenementSpecial}).");
         }
 
         //  Bonus si au moins 3 conditions sont favorables
@@ -200,12 +200,12 @@ public abstract class Plante
             int gain = 10;
             if (Sante + gain > 100) gain = 100 - Sante;
             Sante += gain;
-            Console.WriteLine($"{Nom} prospère grâce à des conditions favorables ! Santé +{gain}.");
+            Console.WriteLine($"{Nom} en ({x},{y}) prospère grâce à des conditions favorables ! Santé +{gain}.");
         }
         else if (conditionsFavorables / conditionsTotal < 0.5)
         {
             Sante = 0;
-            Console.WriteLine($"{Nom} est morte car moins de 50% des conditions essentielles sont remplies.");
+            Console.WriteLine($"{Nom} en ({x},{y}) est morte car moins de 50% des conditions essentielles sont remplies.");
             return;
         }
 
@@ -213,14 +213,14 @@ public abstract class Plante
         if (Sante > 70)
         {
             VitesseCroissance += 0.1;
-            Console.WriteLine($"{Nom} pousse bien.");
+            Console.WriteLine($"{Nom} en ({x},{y}) pousse bien.");
         }
 
         //  Clamp santé entre 0 et 100
         if (Sante <= 0)
         {
             Sante = 0;
-            Console.WriteLine($"{Nom} est morte.");
+            Console.WriteLine($"{Nom} en ({x},{y}) est morte.");
         }
         else if (Sante > 100)
         {
@@ -230,16 +230,16 @@ public abstract class Plante
         // Affichage si la santé a changé
         if (Sante != santeInitiale)
         {
-            Console.WriteLine($"Santé de {Nom} : {santeInitiale} → {Sante}");
+            Console.WriteLine($"Santé de {Nom} en ({x},{y}) : {santeInitiale} → {Sante}");
         }
         if (EstBlessee && SoinEffectueCeTour == true)
         {
             Sante -= 10;
-            Console.WriteLine($"{Nom} n'a pas été soignée et s'affaiblit davantage. Santé -10.");
+            Console.WriteLine($"{Nom} en ({x},{y}) n'a pas été soignée et s'affaiblit davantage. Santé -10.");
             if (Sante <= 0)
             {
                 Sante = 0;
-                Console.WriteLine($"{Nom} est morte par négligence.");
+                Console.WriteLine($"{Nom} en ({x},{y}) est morte par négligence.");
             }
         }
 

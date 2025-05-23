@@ -18,7 +18,7 @@ public class Potager
         for (int y = 0; y < Hauteur; y++)
         {
             for (int x = 0; x < Largeur; x++)
-             {
+            {
                 int choix = random.Next(10);
                 Terrain terrain = choix switch
                 {
@@ -68,10 +68,10 @@ public class Potager
     public bool Planter(Plante plante, int x, int y, Meteo meteo)
     {
         if (!plante.SaisonsDeSemis.Contains(meteo.SaisonActuelle.ToLower()))
-    {
-        Console.WriteLine($"❌ La saison actuelle ({meteo.SaisonActuelle}) ne permet pas de planter {plante.Nom} !");
-        return false;
-    }
+        {
+            Console.WriteLine($"❌ La saison actuelle ({meteo.SaisonActuelle}) ne permet pas de planter {plante.Nom} !");
+            return false;
+        }
         if (!PeutPlanterIci(x, y, plante))
         {
             Console.WriteLine($"❌ Trop proche d'une autre plante pour placer {plante.Nom} en ({x},{y}) !");
@@ -83,195 +83,164 @@ public class Potager
         return true;
     }
 
-  public void EvaluerPlantes(Meteo meteo)
-{
-    bool planteMorte = false;
-
-    for (int y = 0; y < Hauteur; y++)
+    public void EvaluerPlantes(Meteo meteo)
     {
-        for (int x = 0; x < Largeur; x++)
-        {
-            var parcelle = Grille[y, x];
-            if (parcelle.Plante != null)
-            {
-                parcelle.Plante.Evaluer(meteo, parcelle.Terrain);
+        bool planteMorte = false;
 
-                if (parcelle.Plante.EstMorte())
+        for (int y = 0; y < Hauteur; y++)
+        {
+            for (int x = 0; x < Largeur; x++)
+            {
+                var parcelle = Grille[y, x];
+                if (parcelle.Plante != null)
                 {
-                    Console.WriteLine($"⚠️ La plante {parcelle.Plante.Nom} en ({x},{y}) est morte et sera supprimée du potager.");
-                    parcelle.Plante = null;
-                    planteMorte = true;
+                    parcelle.Plante.Evaluer(meteo, parcelle.Terrain,x,y);
+
+                    if (parcelle.Plante.EstMorte())
+                    {
+                        Console.WriteLine($"⚠️ La plante {parcelle.Plante.Nom} en ({x},{y}) est morte et sera supprimée du potager.");
+                        parcelle.Plante = null;
+                        planteMorte = true;
+                    }
                 }
             }
         }
-    }
 
-    if (planteMorte)
-    {
-        Console.WriteLine("\nVoici l'état du potager après suppression des plantes mortes :");
-        AfficherGrille();  
-    }
-}
-
-
-public void AfficherEtat()
-{
-    Console.WriteLine("\n--- État du potager ---");
-
-    bool planteTrouvee = false;
-
-    for (int y = 0; y < Hauteur; y++)
-    {
-        for (int x = 0; x < Largeur; x++)
+        if (planteMorte)
         {
-            var p = Grille[y, x];
-            if (p.Plante != null)
-            {
-                planteTrouvee = true;
-
-                string nom = p.Plante.Nom;
-                string sol = p.Terrain.TypeSol;
-                string sante = $"{p.Plante.Sante}/100";
-
-                Console.WriteLine($"[{x},{y}] - {nom} sur {sol} – Santé : {sante}");
-            }
+            Console.WriteLine("\nVoici l'état du potager après suppression des plantes mortes :");
+            AfficherGrille();
         }
     }
 
-    if (!planteTrouvee)
+
+    public void AfficherEtat()
     {
-        Console.WriteLine("Aucune plante dans le potager.");
-    }
-}
+        Console.WriteLine("\n--- État du potager ---");
 
+        bool planteTrouvee = false;
 
-
-    public void AfficherGrille()  
-{
-    Console.WriteLine("\n🌿 VUE DU POTAGER 🌿\n");
-
-    // En-tête X
-    Console.Write("    ");
-    for (int x = 0; x < Largeur; x++)
-    {
-        Console.Write($" {x:D2} ");
-    }
-    Console.WriteLine();
-
-    // Bordure supérieure
-    Console.Write("    ┌");
-    for (int x = 0; x < Largeur; x++)
-    {
-        Console.Write("───");
-        if (x < Largeur - 1) Console.Write("┬");
-    }
-    Console.WriteLine("┐");
-
-    for (int y = 0; y < Hauteur; y++)
-    {
-        Console.Write($" {y:D2} │");
-        for (int x = 0; x < Largeur; x++)
+        for (int y = 0; y < Hauteur; y++)
         {
-            var parcelle = Grille[y, x];
-            string symbole;
-
-            if (parcelle.Plante == null)
+            for (int x = 0; x < Largeur; x++)
             {
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                symbole = "🟫";
-            }
-            else
-            {
-                switch (parcelle.Plante.Nom.ToLower())
+                var p = Grille[y, x];
+                if (p.Plante != null)
                 {
-                    case "tomate":
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        symbole = "🍅";
-                        break;
-                    case "carotte":
-                        Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        symbole = "🥕";
-                        break;
-                    case "salade":
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        symbole = "🥬";
-                        break;
-                    case "oignon":
-                        Console.ForegroundColor = ConsoleColor.White;
-                        symbole = "🧅";
-                        break;
-                    case "mais":
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        symbole = "🌽";
-                        break;
-                    case "tournesol":
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        symbole = "🌻";
-                        break;
-                    case "fraise":
-                        Console.ForegroundColor = ConsoleColor.Magenta;
-                        symbole = "🍓";
-                        break;
-                    case "ananas":
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        symbole = "🍍";
-                        break;
-                    case "patate":
-                        Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        symbole = "🥔";
-                        break;
-                    case "rose":
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                        symbole = "🌹";
-                        break;
-                    case "courgette":
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        symbole = "🥒";
-                        break;
-                    case "cerisier":
-                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                        symbole = "🍒";
-                        break;
-                    default:
-                        Console.BackgroundColor = ConsoleColor.DarkRed; // Pour repérer les erreurs
-                        Console.ForegroundColor = ConsoleColor.White;
-                        symbole = "??";
-                        break;
+                    planteTrouvee = true;
+
+                    string nom = p.Plante.Nom;
+                    string sol = p.Terrain.TypeSol;
+                    string sante = $"{p.Plante.Sante}/100";
+
+                    Console.WriteLine($"[{x},{y}] - {nom} sur {sol} – Santé : {sante}");
                 }
             }
+        }
 
-            // Affichage fixe sur 3 colonnes
-            Console.Write($" {symbole.PadRight(2)} ");
-            Console.ResetColor();
-            Console.Write("│");
+        if (!planteTrouvee)
+        {
+            Console.WriteLine("Aucune plante dans le potager.");
+        }
+    }
+
+
+
+    public void AfficherGrille(bool rongeurPresent = false)
+    {
+        Console.WriteLine("\n🌿 VUE DU POTAGER 🌿\n");
+
+        int caseWidth = 3;
+        // En-tête X
+        Console.Write("   ");
+        for (int x = 0; x < Largeur; x++)
+        {
+            Console.Write(x.ToString("D2").PadLeft(caseWidth));
+        }
+        if (rongeurPresent)
+        {
+            Console.Write("  🐭");  // Emoji rongeur dans potager
         }
         Console.WriteLine();
 
-        // Bordure intermédiaire
-        if (y < Hauteur - 1)
+        //Grille
+        for (int y = 0; y < Hauteur; y++)
         {
-            Console.Write("    ├");
+            Console.Write(y.ToString("D2").PadLeft(3) + " "); // numéro de ligne
+
             for (int x = 0; x < Largeur; x++)
             {
-                Console.Write("───");
-                if (x < Largeur - 1) Console.Write("┼");
+                var parcelle = Grille[y, x];
+                string symbole = "🟫";
+
+                if (parcelle.Plante != null)
+                {
+                    switch (parcelle.Plante.Nom.ToLower())
+                    {
+                        case "tomate":
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            symbole = "🍅";
+                            break;
+                        case "carotte":
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            symbole = "🥕";
+                            break;
+                        case "salade":
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            symbole = "🥬";
+                            break;
+                        case "oignon":
+                            Console.ForegroundColor = ConsoleColor.White;
+                            symbole = "🧅";
+                            break;
+                        case "mais":
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            symbole = "🌽";
+                            break;
+                        case "tournesol":
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            symbole = "🌻";
+                            break;
+                        case "fraise":
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            symbole = "🍓";
+                            break;
+                        case "ananas":
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            symbole = "🍍";
+                            break;
+                        case "patate":
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            symbole = "🥔";
+                            break;
+                        case "rose":
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            symbole = "🌹";
+                            break;
+                        case "courgette":
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            symbole = "🥒";
+                            break;
+                        case "cerisier":
+                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                            symbole = "🍒";
+                            break;
+                        default:
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            symbole = "🌱";
+                            break;
+                    }
+                }
+
+                Console.Write(symbole + " ");
+                Console.ResetColor();
             }
-            Console.WriteLine("┤");
+            Console.WriteLine();
         }
-    }
+        // Légende
+        Console.WriteLine("\nLégende : 🍅 Tomate | 🥕 Carotte | 🥬 Salade | 🧅 Oignon | 🌽 Maïs | 🌻 Tournesol | 🍒 Cerisier | 🍓 Fraise | 🥔 Patate | 🌹 Rose | 🥒 Courgette | 🟫 Vide\n");
 
-    // Bordure inférieure
-    Console.Write("    └");
-    for (int x = 0; x < Largeur; x++)
-    {
-        Console.Write("───");
-        if (x < Largeur - 1) Console.Write("┴");
     }
-    Console.WriteLine("┘");
-
-    // Légende
-    Console.WriteLine("\nLégende : 🍅 Tomate | 🥕 Carotte | 🥬 Salade | 🧅 Oignon | 🌽 Maïs | 🌻 Tournesol | 🍒 Cerisier | 🍓 Fraise | 🥔 Patate | 🌹 Rose | 🥒 Courgette | 🟫 Vide\n");
-}
 
     public void AfficherPlantesAssoiffees(Meteo meteo)
     {
@@ -323,64 +292,101 @@ public void AfficherEtat()
             Console.WriteLine();
         }
     }
-   public bool ProposerRecolte()
-{
-    bool recoltePossible = false;
-
-    for (int y = 0; y < Hauteur; y++)
+    public bool ProposerRecolte()
     {
-        for (int x = 0; x < Largeur; x++)
+        bool recoltePossible = false;
+
+        for (int y = 0; y < Hauteur; y++)
         {
-            var parcelle = Grille[y, x];
-            if (parcelle.Plante != null && parcelle.Plante.EstMure)
+            for (int x = 0; x < Largeur; x++)
             {
-                Console.WriteLine($" {parcelle.Plante.Nom} mûre en ({x}, {y}) !");
-                recoltePossible = true;
+                var parcelle = Grille[y, x];
+                if (parcelle.Plante != null && parcelle.Plante.EstMure)
+                {
+                    Console.WriteLine($" {parcelle.Plante.Nom} mûre en ({x}, {y}) !");
+                    recoltePossible = true;
+                }
+            }
+        }
+
+        if (!recoltePossible)
+        {
+            Console.WriteLine("aie Aucune plante n'est encore prête à être récoltée.");
+        }
+
+        return recoltePossible;
+    }
+
+    public void Recolter(int x, int y, Graines graines, Fruits fruits)
+    {
+        var parcelle = Grille[y, x];
+
+        if (parcelle.Plante == null)
+        {
+            Console.WriteLine("oupsi Aucune plante à récolter ici.");
+            return;
+        }
+
+        var plante = parcelle.Plante;
+
+        if (!plante.EstMure)
+        {
+            Console.WriteLine($" oh no {plante.Nom} n'est pas encore mûre à ({x},{y}).");
+            return;
+        }
+
+        int nbFruits = plante.QuantiteFruits;
+        int grainesTotal = nbFruits * plante.GrainesParFruit;
+        Console.WriteLine($"youhou Vous avez récolté {nbFruits} fruits et obtenu {grainesTotal} graines de {plante.Nom}(s) à ({x},{y}).");
+
+        graines.Ajouter(plante.Nom.ToLower(), grainesTotal);
+        fruits.Ajouter(plante.Nom.ToLower(), nbFruits);
+        ReinitialiserApresRecolte(plante);
+    }
+
+    private void ReinitialiserApresRecolte(Plante plante)
+    {
+        plante.CroissanceActuelle = 0;
+        Console.WriteLine($"{plante.Nom} va repousser à nouveau.");
+    }
+
+    public void EndommagerPlantesAleatoirement()
+    {
+        Random rand = new Random();
+
+        for (int y = 0; y < Hauteur; y++)
+        {
+            for (int x = 0; x < Largeur; x++)
+            {
+                var plante = Grille[y, x].Plante;
+                if (plante != null && rand.NextDouble() < 0.3) // 30% de chance
+                {
+                    plante.Sante -= 30;
+                    if (plante.Sante < 0) plante.Sante = 0;
+                    Console.WriteLine($"🌿 {plante.Nom} en ({x},{y}) a été endommagée !");
+                }
             }
         }
     }
 
-    if (!recoltePossible)
-    {
-        Console.WriteLine("aie Aucune plante n'est encore prête à être récoltée.");
-    }
-
-    return recoltePossible;
-}
-
-public void Recolter(int x, int y, Graines graines, Fruits fruits)
+public void VolDeFruitsAleatoire(bool defenseActivee)
 {
-    var parcelle = Grille[y, x];
-
-    if (parcelle.Plante == null)
+    Random rand = new Random();
+    double volChance = defenseActivee ? 0.3 : 1;
+    for (int y = 0; y < Hauteur; y++)
     {
-        Console.WriteLine("oupsi Aucune plante à récolter ici.");
-        return;
+        for (int x = 0; x < Largeur; x++)
+        {
+            var plante = Grille[y, x].Plante;
+            if (plante != null && plante.EstMure && rand.NextDouble() < volChance)
+            {
+                int vol = Math.Min(plante.QuantiteFruits, 2);
+                plante.QuantiteFruits -= vol;
+                Console.WriteLine($"❌ {plante.Nom} en ({x},{y}) a perdu {vol} fruit(s) !");
+            }
+        }
     }
-
-    var plante = parcelle.Plante;
-
-    if (!plante.EstMure)
-    {
-        Console.WriteLine($" oh no {plante.Nom} n'est pas encore mûre à ({x},{y}).");
-        return;
-    }
-
-        int nbFruits = plante.QuantiteFruits;
-        int grainesTotal = nbFruits * plante.GrainesParFruit;
-    Console.WriteLine($"youhou Vous avez récolté {nbFruits} fruits et obtenu {grainesTotal} graines de {plante.Nom}(s) à ({x},{y}).");
-
-    graines.Ajouter(plante.Nom.ToLower(), grainesTotal);
-    fruits.Ajouter(plante.Nom.ToLower(), nbFruits);
-    ReinitialiserApresRecolte(plante);
-}
-
-private void ReinitialiserApresRecolte(Plante plante)
-{
-    plante.CroissanceActuelle = 0;
-    Console.WriteLine($"{plante.Nom} va repousser à nouveau.");
 }
 
 
-    
 }
