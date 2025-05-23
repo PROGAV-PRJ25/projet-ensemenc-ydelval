@@ -27,7 +27,7 @@ public abstract class Plante
     {
         return precipitations < BesoinEau * 0.8;
     }
-    public bool ASeteSoifLaSemaineDerniere { get; set; } = false;
+    int conditionsFavorables = 0;
     
     //  Méthode pour soigner une plante
     public void Soigner()
@@ -66,6 +66,38 @@ public abstract class Plante
                 }
 
             }
+        }
+    }
+    public void Arroser()
+    {
+        if (Sante <= 0)
+        {
+            Console.WriteLine($"{Nom} est morte. Impossible de l'arroser.");
+            return;
+        }
+        int gain = 5;
+        int santeInitiale = Sante;
+        Sante += gain;
+        if (Sante > 100) Sante = 100;
+
+        Console.WriteLine($"{Nom} a été arrosée.");
+        ASoif = false;
+        conditionsFavorables++;
+    }
+    public void ProposerArrosage()
+    {
+        if (ASoif)
+        {
+            Console.WriteLine($"{Nom} est a soif. Souhaitez-vous l'arroser ? Tapez 'arroser' pour lui administrer l'eau suffisante.");
+            string reponse = Console.ReadLine().ToLower();
+            if (reponse != null && reponse.Trim().ToLower() == "arroser")
+            {
+                Arroser();
+            }
+            else
+            {
+                Console.WriteLine($"{Nom} n'a pas été arrosée.");
+            }
 
         }
     }
@@ -81,7 +113,6 @@ public abstract class Plante
         }
 
         int santeInitiale = Sante;
-        int conditionsFavorables = 0;
         int conditionsTotal = 5;
 
         //  Température
@@ -114,13 +145,14 @@ public abstract class Plante
         }
 
         //  Eau
-        if (meteo.Precipitations < BesoinEau * 0.8)
+        if (meteo.Precipitations < BesoinEau * 0.9)
         {
             ASoif = true;
             Console.WriteLine($"{Nom} n’a pas reçu assez d’eau ({meteo.Precipitations}mm).");
+            ProposerArrosage();
         }
 
-        else if (meteo.Precipitations > BesoinEau * 1.5)
+        else if (meteo.Precipitations > BesoinEau * 1.9)
 
         {
             Sante -= 5;
@@ -163,14 +195,14 @@ public abstract class Plante
         }
 
         //  Bonus si au moins 3 conditions sont favorables
-        if (conditionsFavorables >= 3)
+        if (conditionsFavorables > 2)
         {
             int gain = 10;
             if (Sante + gain > 100) gain = 100 - Sante;
             Sante += gain;
             Console.WriteLine($"{Nom} prospère grâce à des conditions favorables ! Santé +{gain}.");
         }
-        else if ((double)conditionsFavorables / conditionsTotal < 0.5)
+        else if (conditionsFavorables / conditionsTotal < 0.5)
         {
             Sante = 0;
             Console.WriteLine($"{Nom} est morte car moins de 50% des conditions essentielles sont remplies.");
@@ -210,14 +242,6 @@ public abstract class Plante
                 Console.WriteLine($"{Nom} est morte par négligence.");
             }
         }
-        //Permet au joueur d'avoir le temps d'arroser
-        if (ASoif)
-        {
-            Sante -= 10;
-            Console.WriteLine($"{Nom} n'a pas été arrosée et souffre de sécheresse. Santé -10.");
-            ASoif = false;
-        }
-
 
         // Proposer un soin à la fin de l’évaluation si la plante est malade
         ProposerSoin();

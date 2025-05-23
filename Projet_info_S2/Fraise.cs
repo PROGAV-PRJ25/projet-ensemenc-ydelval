@@ -8,7 +8,7 @@ public class Fraise : Plante
         Espacement = 0.3;
         TerrainPrefere = "Terre";
         PlaceNecessairePourGrandir = 0.5;
-        VitesseCroissance = 1.0;
+        VitesseCroissance = 0.8;
         BesoinEau = 30;
         BesoinLumiere = 0.7;
         TemperatureMin = 10.0;

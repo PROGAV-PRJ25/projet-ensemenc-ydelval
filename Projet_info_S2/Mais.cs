@@ -8,7 +8,7 @@ public class Mais : Plante
         SaisonsDeSemis.AddRange(new List<string> { "printemps" });
         Espacement = 0.4;
         PlaceNecessairePourGrandir = 1.0;
-        VitesseCroissance = 0.9;
+        VitesseCroissance = 0.7;
         BesoinEau = 40;
         BesoinLumiere = 0.8;
         TemperatureMin = 15;

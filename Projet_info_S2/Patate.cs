@@ -8,7 +8,7 @@ public class Patate : Plante
         Espacement = 0.4;
         TerrainPrefere = "Terre";
         PlaceNecessairePourGrandir = 0.9;
-        VitesseCroissance = 1.1;
+        VitesseCroissance = 0.9;
         BesoinEau = 35;
         BesoinLumiere = 0.7;
         TemperatureMin = 8.0;

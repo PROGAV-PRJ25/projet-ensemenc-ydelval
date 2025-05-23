@@ -19,11 +19,11 @@ public class Potager
         {
             for (int x = 0; x < Largeur; x++)
              {
-                int choix = random.Next(3);
+                int choix = random.Next(10);
                 Terrain terrain = choix switch
                 {
-                    0 => new Terre(),
-                    1 => new Sable(),
+                    <= 5 => new Terre(), // plus de chances d'avoir des terrains de terre
+                    <= 7 => new Sable(),
                     _ => new Argile()
                 };
                 Grille[y, x] = new Parcelle(null, terrain);
@@ -109,7 +109,7 @@ public class Potager
     if (planteMorte)
     {
         Console.WriteLine("\nVoici l'état du potager après suppression des plantes mortes :");
-        AfficherGrille();  // Assure-toi que cette méthode affiche bien le potager
+        AfficherGrille();  
     }
 }
 
@@ -228,9 +228,14 @@ public void AfficherEtat()
                         Console.ForegroundColor = ConsoleColor.Green;
                         symbole = "🥒";
                         break;
+                    case "cerisier":
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        symbole = "🍒";
+                        break;
                     default:
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        symbole = "🌱";
+                        Console.BackgroundColor = ConsoleColor.DarkRed; // Pour repérer les erreurs
+                        Console.ForegroundColor = ConsoleColor.White;
+                        symbole = "??";
                         break;
                 }
             }
@@ -265,7 +270,7 @@ public void AfficherEtat()
     Console.WriteLine("┘");
 
     // Légende
-    Console.WriteLine("\nLégende : 🍅 Tomate | 🥕 Carotte | 🥬 Salade | 🧅 Oignon | 🌽 Maïs | 🌻 Tournesol | 🍍 Ananas | 🍓 Fraise | 🥔 Patate | 🌹 Rose | 🥒 Courgette | 🟫 Vide\n");
+    Console.WriteLine("\nLégende : 🍅 Tomate | 🥕 Carotte | 🥬 Salade | 🧅 Oignon | 🌽 Maïs | 🌻 Tournesol | 🍒 Cerisier | 🍓 Fraise | 🥔 Patate | 🌹 Rose | 🥒 Courgette | 🟫 Vide\n");
 }
 
     public void AfficherPlantesAssoiffees(Meteo meteo)

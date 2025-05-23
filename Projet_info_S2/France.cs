@@ -7,8 +7,11 @@ public class France : Pays
         PlantesAutorisees = new List<Type>
         {
             typeof(Patate),
+            typeof(Cerisier),
             typeof(Tomate),
             typeof(Courgette),
+            typeof(Tournesol),
+            typeof(Oignon),
             typeof(Fraise),
             typeof(Carotte),
             typeof(Rose),

@@ -25,9 +25,9 @@ public class Meteo
         switch (SaisonActuelle.ToLower())
         {
             case "printemps":
-                Temperature = random.Next(10, 20);
+                Temperature = random.Next(13, 25);
                 Precipitations = random.Next(10, 50);
-                Ensoleillement = random.NextDouble() * 0.7 + 0.3;
+                Ensoleillement = random.NextDouble() * 0.8 + 0.3;
                 if (random.NextDouble() < 0.1)
                 {
                     Intemperies = true;

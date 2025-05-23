@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 
 class Program
 {
@@ -22,7 +23,7 @@ class Program
             Plante plante = null;
             if (typePlante == typeof(Tomate)) plante = new Tomate();
             else if (typePlante == typeof(Salade)) plante = new Salade();
-            else if (typePlante == typeof(Ananas)) plante = new Ananas();
+            else if (typePlante == typeof(Cerisier)) plante = new Cerisier();
             else if (typePlante == typeof(Rose)) plante = new Rose();
             else if (typePlante == typeof(Patate)) plante = new Patate();
             else if (typePlante == typeof(Carotte)) plante = new Carotte();
@@ -30,6 +31,7 @@ class Program
             else if (typePlante == typeof(Fraise)) plante = new Fraise();
             else if (typePlante == typeof(Oignon)) plante = new Oignon();
             else if (typePlante == typeof(Mais)) plante = new Mais();
+            else if (typePlante == typeof(Tournesol)) plante = new Tournesol();
 
             if (plante != null)
             {
@@ -58,11 +60,6 @@ class Program
             Console.WriteLine("- Soignez vos plantes pour qu'elles poussent mieux.");
             Console.WriteLine("- Récoltez au bon moment.");
             Console.WriteLine("- Surveillez la météo et adaptez-vous.");
-            Console.WriteLine("\nVoici les plantes disponibles :");
-            foreach (var plante in plantesDisponibles)
-            {
-                Console.WriteLine($"🌱 {plante.Nom} - Type : {plante.Type} - Terrain préféré : {plante.TerrainPrefere}");
-            }
             Console.WriteLine("\nAppuyez sur Entrée pour continuer...");
             Console.ReadLine();
 
@@ -78,7 +75,6 @@ class Program
 
             potager.AfficherEtat();
             potager.ProposerRecolte();
-            potager.AfficherPlantesAssoiffees(meteo);
 
 
             // Affichage propositions (planter, soigner, récolter, etc)
@@ -109,15 +105,15 @@ class Program
                 case "1":
                     {
                         Console.WriteLine("Quelle plante voulez-vous planter?");
-                        string nomP = Console.ReadLine()!;
+                        string nomP = Console.ReadLine()!.ToLower();
 
-                        if (!graines.AGraines(nomP.ToLower()))
+                        if (!graines.AGraines(nomP))
                         {
                             Console.WriteLine("Vous n'avez pas de graines de cette plante");
                             break;
                         }
                         Plante plante;
-                        switch (nomP.ToLower())
+                        switch (nomP)
                         {
                             case "tomate":
                                 plante = new Tomate();
@@ -125,8 +121,11 @@ class Program
                             case "salade":
                                 plante = new Salade();
                                 break;
+                            case "cerisier":
+                                plante = new Cerisier();
+                                break;
                             case "ananas":
-                                plante = new Ananas();
+                                plante = new Cerisier();
                                 break;
                             case "carotte":
                                 plante = new Carotte();
@@ -148,6 +147,9 @@ class Program
                                 break;
                             case "courgette":
                                 plante = new Courgette();
+                                break;
+                                case "tournesol":
+                                plante = new Tournesol();
                                 break;
                             default:
                                 plante = null;

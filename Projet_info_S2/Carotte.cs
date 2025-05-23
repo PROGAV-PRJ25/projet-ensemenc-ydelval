@@ -4,11 +4,11 @@ public class Carotte : Plante
     {
         Nom = "Carotte";
         Type = "Annuelle";
-        TerrainPrefere = "Argile";
+        TerrainPrefere = "Sableux";
         SaisonsDeSemis.AddRange(new List<string> { "printemps", "été" });
         Espacement = 0.2;
         PlaceNecessairePourGrandir = 0.4;
-        VitesseCroissance = 1;
+        VitesseCroissance = 0.8;
         BesoinEau = 25;
         BesoinLumiere = 0.6;
         TemperatureMin = 8;
